@@ -1,0 +1,161 @@
+div.tournament-Area {
+    width: 100%;
+    background: linear-gradient(165deg, #ffffff, #a5a5a5);
+}
+div.tournament-title {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    border: solid 2px var(--black);
+    border-bottom: none;
+}
+div.tournament-title h2 {
+    padding-left: 10px;
+}
+div.tournament-title h2 em {
+    opacity: 0.50;
+}
+
+
+div.tournament-Area button.tournament-details-button[isOpen] {
+    position: absolute;
+    right: 0px;
+    box-sizing: content-box;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;  
+    padding: 0;
+    font-size: 30px;
+    border: none;  
+    display: grid;
+    cursor: pointer;
+}
+div.tournament-Area button.tournament-details-button[isOpen=false] { 
+    align-items: start;
+    padding-right: 20px;
+    writing-mode: sideways-rl; 
+}
+div.tournament-Area button.tournament-details-button[isOpen=true] { 
+    align-items: end;
+    padding-right: 20px;
+    writing-mode: sideways-lr; 
+}
+
+div.tournament-Area  div.tournament-details[isOpen] {
+    border: solid 2px var(--black);
+    border-top: none;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+} 
+
+div.tournament-Area div.tournament-details[isOpen=false] { 
+    height: 0;
+}
+div.tournament-Area div.tournament-details[isOpen=true] {
+    height: auto;
+    padding: 15px;
+}
+
+
+div.matches {
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+}
+
+div.matches div.one-match {
+    position: relative;
+    display:flex;
+    margin: 10px;
+    border: solid 1px var(--black);
+    background-color: var(--white);
+    height: 180px;
+    min-width: 300px;
+    overflow: hidden;
+}
+
+/* Section pour les noms des joueurs */
+div.matches div.one-match div.names {
+    position:absolute;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: calc(100% - 5px);
+    padding-left: 5px;
+    text-wrap: nowrap;
+    background-color: var(--grey);
+}
+
+div.matches div.one-match div.name-1 { top: 0px; }
+div.matches div.one-match div.name-2 { top: 110px; }
+
+
+/* Section pour les points */
+div.matches div.one-match div.P1-score, div.matches div.one-match div.P2-score {
+    box-sizing: border-box;
+    position:absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 70px;
+}
+
+div.matches div.one-match div.P1-score { top: 50px; border-bottom: solid 1px var(--black); }
+div.matches div.one-match div.P2-score { top: 80px; }
+
+div.matches div.one-match div.service[isServer=true] {
+    left: 0px;
+    width: 0;
+    height: 0; 
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent; 
+    border-left:10px solid var(--black);
+    
+}
+
+div.matches div.one-match div.points {
+    left: 0px;
+    width: 90px;
+    border-right: solid 1px var(--black);
+}
+
+div.matches div.one-match div.set1 {
+    left: 90px;
+    border-right: solid 1px var(--black);
+}
+
+div.matches div.one-match div.set2 {
+    left: 160px;
+    border-right: solid 1px var(--black);
+}
+
+div.matches div.one-match div.set3 {
+    left: 230px;
+}
+div.matches div.one-match sup {
+    position: absolute;
+    height: 30px;  
+    left: 41px;
+}
+
+div.matches div.one-match div.match-status {
+    position: absolute;
+    top: 160px;
+    left: 0;
+    background-color: var(--black);
+    width: calc(50% - 2px);
+    padding-left: 2px;
+    color: var(--white);
+}
+div.matches div.one-match div.match-time {
+    position: absolute;
+    top: 160px;
+    left: 50%;
+    background-color: var(--black);
+    width: calc(50% - 2px);
+    padding-right: 2px;
+    color: var(--white);
+    text-align: right;
+}

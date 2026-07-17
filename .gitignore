@@ -1,0 +1,10 @@
+src/Config/xamppVariables.php
+docker-compose.yaml
+
+# Prise en compte du nouveau gitIgnore
+
+.env
+config.php
+dockerfile
+docker-compose.yaml
+donnees.sql

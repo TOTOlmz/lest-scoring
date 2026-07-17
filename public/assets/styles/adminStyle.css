@@ -1,0 +1,95 @@
+.admin-forms-block h3, .admin-space-block h3 {
+    margin: 0 5px;
+}
+.admin-space-block h3 {
+    padding: 20px 20px 0 20px;
+}
+
+div.admin-forms-block, div.admin-space-block {
+    margin: 20px 0;
+}
+
+div.admin-forms-block {
+    display: flex;
+    gap: 10px;
+}
+div.admin-space-block {
+    border: solid 1px var(--black);
+}
+
+
+.admin-form {
+    background-color: var(--white);
+    padding : 20px;
+    border: solid 1px var(--black);
+    box-shadow: 5px 5px 0 var(--black),
+                5px -5px 0 var(--black);
+    box-sizing: border-box;
+    width: calc(50% - 10px);
+    margin: 0 5px;  
+}
+
+.admin-form input {
+    padding: 10px;
+    width: 90%;
+    border: solid 1px var(--black);
+    margin: 2px;
+    height: 20px;
+}
+
+.admin-search-form {
+    display: flex;
+    background-color: var(--white);
+    padding : 0 20px 20px 20px;
+    box-sizing: border-box;
+    width: calc(100% - 10px);
+    margin: 0 5px;
+}
+
+.admin-search-form input, .admin-search-form select {
+    padding: 10px;
+    margin: 2px 5px;
+    height: 20px;
+    width: inherit;
+    border: solid 1px var(--black);
+    background-color: transparent;
+}
+.admin-search-form select {
+    box-sizing: content-box;
+}
+
+.admin-search-form .admin-button {
+    text-align: center;
+    margin-top: 2px;
+}
+
+.admin-search-results {
+    margin: 0 5px;
+    padding : 0 20px 20px 20px;
+} 
+
+.admin-search-results div.research-box {
+    border: solid 1px var(--black);
+    box-sizing: border-box;
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+.admin-search-results div.research-box h4, .admin-search-results div.research-box p {
+    margin: 15px auto;
+}
+
+@media screen and (max-width: 768px) {
+    .admin-forms-block, .admin-space-block {
+        flex-direction: column;
+    }
+
+    .admin-form {
+        width: 100%;
+        margin: 10px 0;
+    }
+    .admin-search-form {
+        flex-direction: column;
+    }
+}

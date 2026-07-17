@@ -1,0 +1,11 @@
+# Fichiers et dossiers à ignorer lors du build Docker
+.git
+.gitignore
+.dockerignore
+docker-compose.yaml
+Dockerfile
+README.md
+.DS_Store
+*.log
+vendor/bin/var-dump-server
+vendor/bin/var-dump-server.bat

@@ -1,0 +1,32 @@
+.connection {
+    background-color: var(--white);
+    width: 300px;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding : 20px;
+    border: solid 1px var(--black);
+    box-shadow: 5px 5px 0 var(--black),
+                5px -5px 0 var(--black);
+}
+
+.connection input {
+    padding: 10px;
+    width: 90%;
+    border: solid 1px var(--black);
+    margin: 2px;
+}
+
+.password-requirements {
+    display: grid;
+}
+
+.password-requirements .pass {
+    padding: 0.2rem 0.5rem;
+    margin: 0.2rem;
+    color: white;
+    background-color: #a10000;
+    display: block;
+}
