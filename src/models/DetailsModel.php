@@ -22,7 +22,7 @@ class DetailsModel extends BaseModel {
         }
 
         // On récupère les draws du tournoi
-        $sql = "SELECT id_to_display, title, type, size FROM draws WHERE tournament_id = :id";
+        $sql = "SELECT id, id_to_display, title, type, size FROM draws WHERE tournament_id = :id";
         $result["draws"] = $this->fetchAll($sql, ['id' => $tournId]);
 
         // On récupère les courts du tournoi
@@ -34,20 +34,20 @@ class DetailsModel extends BaseModel {
         $result["umpires"] = $this->fetchAll($sql, ['id' => $tournId]);
 
         // On récupère ensuite ses matchs
-        $sql = 'SELECT m.id_to_display, m.scoring_type, m.draw_position, m.final_score, 
+        $sql = 'SELECT m.id_to_display, m.scoring_type, m.draw_position, m.draw_id, m.final_score, 
         taa.lastname AS teamAP1_name, tab.lastname AS teamAP2_name, tba.lastname AS teamBP1_name, tbb.lastname AS teamBP2_name, m.status, m.winner
         FROM matches m
         LEFT JOIN players taa ON m.teamA_player1_id = taa.id
         LEFT JOIN players tab ON m.teamA_player2_id = tab.id
         LEFT JOIN players tba ON m.teamB_player1_id = tba.id
         LEFT JOIN players tbb ON m.teamB_player2_id = tbb.id
-        WHERE m.tournament_id = :id';
+        WHERE m.tournament_id = :id ORDER BY m.draw_position ASC';
         $result["matches"] = $this->fetchAll($sql, ['id' => $tournId]);
 
         // On récupère ensuite ses joueurs
-        $sql = 'SELECT p.id_to_display, p.firstname, p.lastname, p.nationality, p.rank FROM players p
+        $sql = 'SELECT DISTINCT p.id_to_display, p.firstname, p.lastname, p.nationality, p.rank FROM players p
         JOIN matches m ON p.id = m.teamA_player1_id OR p.id = m.teamA_player2_id OR p.id = m.teamB_player1_id OR p.id = m.teamB_player2_id
-        WHERE m.tournament_id = :id';
+        WHERE m.tournament_id = :id ORDER BY p.lastname, p.firstname ASC';
         $result["players"] = $this->fetchAll($sql, ['id' => $tournId]);
 
         return $result;

@@ -19,6 +19,9 @@
     --grey-medium-dark: #7f7f7f; /* grey */
     --grey-dark: #595959;  /* Charcoal */
 
+    /* Dégradés */
+    --white-to-grey: linear-gradient(165deg, #ffffff, #a5a5a5);
+
     /* Polices d'écritures */
     --first-font: "IBM Plex Sans";
     --button-font: "Martian Mono";

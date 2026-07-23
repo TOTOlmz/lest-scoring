@@ -6,7 +6,7 @@
     <link rel="icon" type="image/x-icon">
     <?php // On appelle les styles ?>
     <link rel="stylesheet" href="./assets/styles/mainStyle.css">
-    <link rel="stylesheet" href="./assets/styles/tournamentsListStyle.css">
+    <link rel="stylesheet" href="./assets/styles/elementListStyle.css">
     <title>LEST-scoring</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
         <pre><?php  // print_r($this->tournaments) ?></pre>
 
 
-        <?php require_once ROOT_PATH . "/src/views/components/tournamentsList.php"; ?>
+        <?php require_once ROOT_PATH . "/src/views/components/elementList.php"; ?>
     </div>
 </body>
 </html>

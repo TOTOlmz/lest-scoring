@@ -1,12 +1,12 @@
 <?php foreach ($this->tournaments as $t): ?>
-    <div class="tournament-Area">
-        <div class="tournament-title">
+    <div class="element-Area">
+        <div class="element-title">
             <h2><?= $t["club"] ?>, <?= $t["city"] ?> <em>(<?= $t["name"] ?>)</em></h2>
-            <button class="tournament-details-button" isOpen="false">❯</button>
+            <button class="element-details-button" isOpen="false">❯</button>
         </div>
-        <div class="tournament-details" isOpen="false">
+        <div class="element-details" isOpen="false">
             <h3>Scores : </h3>
-            <div class="tournament-courts">
+            <div class="element-courts">
                 <?php foreach ($t["courts"] as $c): ?>
                     <div class="courts">
                         <h4><?= $c["name"] ?></h4>
@@ -66,7 +66,7 @@
 
             </div>
 
-            <div class="tournament-players">
+            <div class="element-players">
 
             </div>
         </div>
@@ -74,4 +74,4 @@
     </div>
 <?php endforeach; ?>
 
-<script src="./assets/scripts/tournamentsList.js"> /* Script permettant de créer un système d'onglets pour les différents tournois */</script>
+<script src="./assets/scripts/elementList.js"> /* Script permettant de créer un système d'onglets pour les différents tournois */</script>

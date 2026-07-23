@@ -1,23 +1,24 @@
-div.tournament-Area {
+div.element-Area {
     width: 100%;
-    background: linear-gradient(165deg, #ffffff, #a5a5a5);
+    background: var(--white-to-grey);
+    margin: 10px 0;
 }
-div.tournament-title {
+div.element-title {
     position: relative;
     display: flex;
     justify-content: space-between;
     border: solid 2px var(--black);
     border-bottom: none;
 }
-div.tournament-title h2 {
+div.element-title h2 {
     padding-left: 10px;
 }
-div.tournament-title h2 em {
+div.element-title h2 em {
     opacity: 0.50;
 }
 
 
-div.tournament-Area button.tournament-details-button[isOpen] {
+div.element-Area button.element-details-button[isOpen] {
     position: absolute;
     right: 0px;
     box-sizing: content-box;
@@ -30,30 +31,32 @@ div.tournament-Area button.tournament-details-button[isOpen] {
     display: grid;
     cursor: pointer;
 }
-div.tournament-Area button.tournament-details-button[isOpen=false] { 
+div.element-Area button.element-details-button[isOpen=false] { 
     align-items: start;
     padding-right: 20px;
     writing-mode: sideways-rl; 
 }
-div.tournament-Area button.tournament-details-button[isOpen=true] { 
+div.element-Area button.element-details-button[isOpen=true] { 
     align-items: end;
     padding-right: 20px;
     writing-mode: sideways-lr; 
 }
 
-div.tournament-Area  div.tournament-details[isOpen] {
+div.element-Area  div.element-details {
     border: solid 2px var(--black);
     border-top: none;
-    padding: 0;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
     overflow: hidden;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
 } 
 
-div.tournament-Area div.tournament-details[isOpen=false] { 
-    height: 0;
+div.element-Area div.element-details[isOpen=false] { 
+    max-height: 0;
 }
-div.tournament-Area div.tournament-details[isOpen=true] {
-    height: auto;
+div.element-Area div.element-details[isOpen=true] {
+    max-height: 1000px;
     padding: 15px;
 }
 
@@ -62,6 +65,7 @@ div.matches {
     display: flex;
     width: 100%;
     overflow-x: scroll;
+    background-color: var(--white);
 }
 
 div.matches div.one-match {

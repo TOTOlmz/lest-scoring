@@ -64,13 +64,14 @@ CREATE TABLE `matches` (
   `tournament_id` int(11) NOT NULL,
   `scoring_type` varchar(5) NOT NULL,
   `draw_id` int(11) NOT NULL,
-  `draw_position` int(11) NOT NULL,
+  `draw_position` varchar(10) NOT NULL,
+  `final_score` varchar(100) NOT NULL,
   `teamA_Player1_id` int(11) DEFAULT NULL,
   `teamA_Player2_id` int(11) DEFAULT NULL,
   `teamB_Player1_id` int(11) DEFAULT NULL,
   `teamB_Player2_id` int(11) DEFAULT NULL,
   `status` varchar(255) NOT NULL,
-  `winner` int(11) DEFAULT NULL,
+  `winner` varchar(2) DEFAULT NULL,
   UNIQUE KEY `uk_matches_id_to_display` (`id_to_display`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -332,8 +333,7 @@ ALTER TABLE `matches`
   ADD CONSTRAINT `fk_matches_teamA_p2` FOREIGN KEY (`teamA_Player2_id`) REFERENCES `players` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_matches_teamB_p1` FOREIGN KEY (`teamB_Player1_id`) REFERENCES `players` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_matches_teamB_p2` FOREIGN KEY (`teamB_Player2_id`) REFERENCES `players` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_matches_tournament` FOREIGN KEY (`tournament_id`) REFERENCES `tournaments` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_matches_winner` FOREIGN KEY (`winner`) REFERENCES `players` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_matches_tournament` FOREIGN KEY (`tournament_id`) REFERENCES `tournaments` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `scores`

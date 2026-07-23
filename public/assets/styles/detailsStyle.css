@@ -1,0 +1,58 @@
+div.element-Area div.element-details div.draw-area {
+    display: flex;
+    flex-direction: row;
+}
+div.element-Area div.element-details div.draw-area div.draw-column {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+div.element-Area div.element-details div.draw-area div.draw-column div.match-card {
+    background-color: var(--white);
+    border: solid 1px var(--black);
+    padding: 10px;
+    width: fit-content;
+    width: 200px;
+}
+
+div.element-Area div.element-details div.draw-area div.draw-column div.match-card p[data-winner="false"] {
+    opacity : 0.75;
+}
+
+div.element-Area div.element-details div.player-card,
+div.element-Area div.element-details div.court-card,
+div.element-Area div.element-details div.umpire-card {
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1px var(--black);
+    background-color: var(--white);
+    padding: 0 10px;
+    justify-content: space-between;
+}
+div.element-Area div.element-details div.player-card:last-child,
+div.element-Area div.element-details div.court-card:last-child,
+div.element-Area div.element-details div.umpire-card:last-child {
+    border-bottom: none;
+}
+
+
+div.element-Area div.element-details div.player-card div.player-infos,
+div.element-Area div.element-details div.court-card div.court-infos,
+div.element-Area div.element-details div.umpire-card div.umpire-infos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+div.element-Area div.element-details div.player-card div.player-infos img.player-flag {
+    height: 20px;
+    width: 30px;
+}
+div.element-Area div.element-details div.player-card button,
+div.element-Area div.element-details div.court-card button,
+div.element-Area div.element-details div.umpire-card button { 
+    padding: 5px 15px;
+    margin: 5px;
+}
+
+
