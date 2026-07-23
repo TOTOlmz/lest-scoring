@@ -26,6 +26,6 @@ class HomeController extends BaseController {
         $currentTournament = $this->tournamentModel->getAllTournamentDataById(1);
         // echo "<pre>"; print_r($currentTournament); echo "</pre>";
         require_once ROOT_PATH . '/src/views/HomeView.php';
-
     }   
+
 }

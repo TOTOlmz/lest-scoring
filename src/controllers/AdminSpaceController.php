@@ -7,7 +7,7 @@ use App\Models\AdminModel;
 /**
  * UserSpaceController
  * 
- * Contrôleur gérant l'affichage de 'espace utilisateur
+ * Contrôleur gérant l'affichage de l'espace administrateur
  * 
  */
 
@@ -63,7 +63,6 @@ class AdminSpaceController extends BaseController {
             $this->tournaments = $this->processTournaments($this->tournaments);
         }
 
-
         
         require_once ROOT_PATH . "/src/views/AdminSpaceView.php";
     }
@@ -93,8 +92,8 @@ class AdminSpaceController extends BaseController {
             }
             
             $password = $_ENV["DEFAULT_PASSWORD"];
-
-            if (empty($this->errors) && $this->adminModel->setDirector($email, $password)) {
+            $publicId = $this->generatePublicCode("users");
+            if (empty($this->errors) && $this->adminModel->setDirector($publicId, $email, $password)) {
                 $this->success = "Directeur ajouté avec succès.";
             } else {
                 $this->errors[] = "Erreur lors de l'ajout du directeur.";
@@ -136,8 +135,10 @@ class AdminSpaceController extends BaseController {
             // Si le directeur n'existe pas, on le crée
             if (!$dirId || $dirId === 1) {
                 $password = $_ENV["DEFAULT_PASSWORD"];
+                
+                $publicDirId = $this->generatePublicCode("users");
                 // On crée le directeur en BDD
-                $dirId = $this->adminModel->setDirector($directorEmail, $password);
+                $dirId = $this->adminModel->setDirector($publicDirId, $directorEmail, $password);
                 if (empty($this->errors) && $dirId && is_int($dirId)) {
                     $this->success = "Directeur ajouté avec succès.";
                 } else {
@@ -148,7 +149,8 @@ class AdminSpaceController extends BaseController {
         // S'il n'y a pas de mail envoyé, le tournoi est sous la responsabilité de l'admin ($dirId reste donc 1)
         
         // On crée le tournoi s'il n'y a pas d'erreurs
-        if (empty($this->errors)  && $this->adminModel->setTournament($tournamentName, $dirId)) {
+        $publicTournId = $this->generatePublicCode("users");
+        if (empty($this->errors)  && $this->adminModel->setTournament($publicTournId, $tournamentName, $dirId)) {
             $this->success = "Tournoi ajouté avec succès.";
         } else {
             $this->errors[] = "Erreur lors de la création du tournoi.";

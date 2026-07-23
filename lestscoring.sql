@@ -29,9 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `courts` (
   `id` int(11) NOT NULL,
+  `id_to_display` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `tournament_id` int(11) NOT NULL
+  `tournament_id` int(11) NOT NULL,
+  UNIQUE KEY `uk_courts_id_to_display` (`id_to_display`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -42,10 +44,12 @@ CREATE TABLE `courts` (
 
 CREATE TABLE `draws` (
   `id` int(11) NOT NULL,
+  `id_to_display` varchar(255) NOT NULL,
   `title` varchar(100) DEFAULT NULL,
   `type` varchar(100) NOT NULL,
   `size` int(11) NOT NULL,
-  `tournament_id` int(11) NOT NULL
+  `tournament_id` int(11) NOT NULL,
+  UNIQUE KEY `uk_draws_id_to_display` (`id_to_display`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -56,6 +60,7 @@ CREATE TABLE `draws` (
 
 CREATE TABLE `matches` (
   `id` int(11) NOT NULL,
+  `id_to_display` varchar(255) NOT NULL,
   `tournament_id` int(11) NOT NULL,
   `scoring_type` varchar(5) NOT NULL,
   `draw_id` int(11) NOT NULL,
@@ -65,7 +70,8 @@ CREATE TABLE `matches` (
   `teamB_Player1_id` int(11) DEFAULT NULL,
   `teamB_Player2_id` int(11) DEFAULT NULL,
   `status` varchar(255) NOT NULL,
-  `winner` int(11) DEFAULT NULL
+  `winner` int(11) DEFAULT NULL,
+  UNIQUE KEY `uk_matches_id_to_display` (`id_to_display`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -76,10 +82,12 @@ CREATE TABLE `matches` (
 
 CREATE TABLE `players` (
   `id` int(11) NOT NULL,
+  `id_to_display` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `nationality` varchar(3) DEFAULT NULL,
-  `rank` int(11) DEFAULT NULL
+  `rank` int(11) DEFAULT NULL,
+  UNIQUE KEY `uk_players_id_to_display` (`id_to_display`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -90,6 +98,7 @@ CREATE TABLE `players` (
 
 CREATE TABLE `scores` (
   `id` int(11) NOT NULL,
+  `id_to_display` varchar(255) NOT NULL,
   `match_id` int(11) NOT NULL,
   `court_id` int(11) DEFAULT NULL,
   `umpire_id` int(11) DEFAULT NULL,
@@ -118,7 +127,8 @@ CREATE TABLE `scores` (
   `teamB_tie3` int(3) DEFAULT NULL,
   `set1_time` int(100) DEFAULT NULL,
   `set2_time` int(100) DEFAULT NULL,
-  `set3_time` int(100) DEFAULT NULL
+  `set3_time` int(100) DEFAULT NULL,
+  UNIQUE KEY `uk_scores_id_to_display` (`id_to_display`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -129,12 +139,14 @@ CREATE TABLE `scores` (
 
 CREATE TABLE `tournaments` (
   `id` int(11) NOT NULL,
+  `id_to_display` varchar(255) NOT NULL,
   `club` varchar(255) NULL,
   `city` varchar(255) NULL,
   `name` varchar(255) NULL,
   `start_time` int(100) DEFAULT NULL,
   `end_time` int(100) DEFAULT NULL,
-  `director_id` int(11) NOT NULL
+  `director_id` int(11) NOT NULL,
+  UNIQUE KEY `uk_tournaments_id_to_display` (`id_to_display`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -145,10 +157,12 @@ CREATE TABLE `tournaments` (
 
 CREATE TABLE `umpires` (
   `id` int(11) NOT NULL,
+  `id_to_display` varchar(255) NOT NULL,
   `username` varchar(100) DEFAULT NULL,
   `firstname` varchar(100) DEFAULT NULL,
   `lastname` varchar(100) DEFAULT NULL,
-  `tournament_id` int(11) NOT NULL
+  `tournament_id` int(11) NOT NULL,
+  UNIQUE KEY `uk_umpires_id_to_display` (`id_to_display`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -159,13 +173,15 @@ CREATE TABLE `umpires` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `id_to_display` varchar(255) NOT NULL,
   `name` varchar(100) NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('ADMIN','DIRECTOR','UMPIRE','USER') NOT NULL,
   `is_permanent` int(1) NOT NULL,
   `is_suspended` int(1) NOT NULL,
-  UNIQUE KEY `uk_users_email` (`email`)
+  UNIQUE KEY `uk_users_email` (`email`),
+  UNIQUE KEY `uk_users_id_to_display` (`id_to_display`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 

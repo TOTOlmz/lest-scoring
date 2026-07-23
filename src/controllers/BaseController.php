@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace App\controllers;
 
+use App\models\BaseModel;
+
 /**
  * BaseController
  * 
@@ -57,7 +59,7 @@ class BaseController {
     }
 
     // Vérification de l'autorisation d'accès à une page
-    public function checkAccessAutorisation($role) {
+    public function checkAccessAutorisation(string $role) {
         if (!isset($_SESSION) || !isset($_SESSION["user_id"])
             || (!isset($_SESSION["user_role"]) && $_SESSION["user_role"] !== $role)) { 
             $this->logout();
@@ -121,6 +123,26 @@ class BaseController {
             } 
         }
         return $tournaments;
+    }
+
+    // Fonction permettant de générer un code utilisable pour identifier un élément via les paramètres d'url
+    public function generatePublicCode(string $table, int $length = 8): string {
+        
+        // On crée une chaine comportant toutes les lettres en MAJ et en min ainsi que tous les chiffres
+        $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        
+        // tant que le code généré n'est pas unique, on génère un nouveau code
+        do {
+            $code = "";
+
+            // On récupère un caractère aléatoire de la chaine "characters" et on l'ajoute à code. On fait ca autant de fois que "length" nous le demande
+            for ($i = 0; $i < $length; $i++) {
+                $code .= $characters[random_int(0, strlen($characters) - 1)];
+            }
+            // On vérifie la présence du code en BDD
+        } while (!BaseModel::isUniqueCode($code, $table));
+
+        return $code;
     }
 
 }

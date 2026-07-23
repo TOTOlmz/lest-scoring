@@ -112,4 +112,10 @@ abstract class BaseModel {
         $stmt->execute($params);
         return (string) $pdo->lastInsertId();
     }
+
+    public static function isUniqueCode(string $value, string $table): bool {
+        $sql = "SELECT COUNT(*) AS total FROM {$table} WHERE id_to_display = :value";
+        $result = BaseModel::count($sql, [':value' => $value]);
+        return $result == 0;
+    }
 }

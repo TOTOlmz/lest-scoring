@@ -18,7 +18,7 @@
 
     <div class="centered-div">
         <h1>Espace Administrateur</h1>
-        <pre><?php  // print_r($this->tournaments) ?></pre>
+        <pre><?php // print_r($this->tournaments) ?></pre>
 
         <div class="admin-forms-block">
             <form class="admin-form" method="post">

@@ -34,10 +34,11 @@ class AuthModel extends BaseModel {
     }
 
     // Fonction permettant de créer un nouvel utilisateur
-    public function setUser(string $name, string $email, string $password, string $role): int {
-        $sql = "INSERT INTO users (name, email, password, role, is_permanent, is_suspended)
-        VALUES (:name, :email, :password, :role, 1, 0)";
+    public function setUser(string $publicId, string $name, string $email, string $password, string $role): int {
+        $sql = "INSERT INTO users (id_to_display, name, email, password, role, is_permanent, is_suspended)
+        VALUES (:public_id, :name, :email, :password, :role, 1, 0)";
         return $this->lastInsert($sql, [
+            "public_id" => $publicId,
             "name" => $name,
             "email" => $email,
             "password" => $password,

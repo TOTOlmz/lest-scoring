@@ -1,7 +1,7 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    Modele gérant les différentes opérations liées à la connexion
-    et l'inscription des utilisateurs
+    Modele gérant les différentes opérations liées aux
+    manipulations de l'administrateur
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 
 namespace App\models;
@@ -11,10 +11,10 @@ namespace App\models;
 class AdminModel extends BaseModel {
 
     // Fonction permettant de récupérer les informations de l'utilisateur dans la bdd si son mot de passe correspond
-    public function setDirector(string $email, string $password): ?int {
-        $sql = 'INSERT INTO users (email, password, role, is_permanent, is_suspended) 
-        VALUES (:email, :password, :role, 1, 0)';
-        return $this->lastInsert($sql, ['email' => $email, 'password' => $password, "role" => "DIRECTOR"]);
+    public function setDirector(string $publicId, string $email, string $password): ?int {
+        $sql = 'INSERT INTO users (id_to_display, email, password, role, is_permanent, is_suspended) 
+        VALUES (:public_id, :email, :password, :role, 1, 0)';
+        return $this->lastInsert($sql, ['public_id' => $publicId,'email' => $email, 'password' => $password, "role" => "DIRECTOR"]);
     }
 
     // Fonction permettant de vérifier l'unicité d'un email
@@ -24,10 +24,11 @@ class AdminModel extends BaseModel {
     }
 
     // Fonction permettant de créer un nouvel utilisateur
-    public function setTournament(string $name, int $dId): int {
-        $sql = "INSERT INTO tournaments (name, director_id)
-        VALUES (:name, :director_id)";
+    public function setTournament(string $publicId, string $name, int $dId): int {
+        $sql = "INSERT INTO tournaments (id_to_display, name, director_id)
+        VALUES (:public_id, :name, :director_id)";
         return $this->lastInsert($sql, [
+            "public_id" => $publicId,
             "name" => $name,
             "director_id" => $dId
         ]);
@@ -48,7 +49,7 @@ class AdminModel extends BaseModel {
 
         // On cherche les tournois qui correspondent
         if ($category !== "email") {
-            $sql = "SELECT t.id, t.club, t.city, t.name, t.start_time, t.end_time, d.name AS director_name, d.email AS director_email  
+            $sql = "SELECT t.id, t.id_to_display, t.club, t.city, t.name, t.start_time, t.end_time, d.name AS director_name, d.email AS director_email  
             FROM tournaments t JOIN users d ON d.id = t.director_id 
             WHERE t.$category = :field";
             if ($category === "name") {

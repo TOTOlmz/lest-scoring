@@ -12,9 +12,11 @@ class TournamentModel extends BaseModel {
 
 
     // Fonction permettant d'ajouter un tournoi
-    public function setTournament(string $name, string $sTime, string $eTime, int $directorId): ?int {
-        $sql = "INSERT INTO tournaments (name, start_time, end_time, director_id) VALUES (:name, :start_time, :end_time, :director_id)";
+    public function setTournament(string $publicId, string $name, string $sTime, string $eTime, int $directorId): ?int {
+        $sql = "INSERT INTO tournaments (id_to_display, name, start_time, end_time, director_id) 
+        VALUES (:public_id, :name, :start_time, :end_time, :director_id)";
         $params = [
+            "public_id" => $publicId,
             "name" => $name,
             "start_time" => $sTime,
             "end_time" => $eTime,
@@ -99,8 +101,15 @@ class TournamentModel extends BaseModel {
         return $tournament;
     }
 
+    // Fonction permettant de récupérer un tournoi via l'id du directeur
     public function getCurrentTournamentByDirectorId(int $dirId, $time): ?array {
         $sql = "SELECT * FROM tournaments WHERE director_id = :dirId AND start_time <= :current_time AND end_time >= current_time";
-        return $this->fetchAll($sql, ["current_time" => $time]);
+        return $this->fetchAll($sql, ["idrId" => $dirId, "current_time" => $time]);
+    }
+
+    // Fonction permettant de récupérer un identifiant de tournoi via l'id_to_display
+    public function getTournamentIdByPublicId(string $publicId): ?string {
+        $sql = "SELECT id FROM tournaments WHERE id_to_display = :publicId";
+        return $this->fetchColumn($sql, ["publicId" => $publicId]);
     }
 }
