@@ -1,23 +1,65 @@
 div.element-Area div.element-details div.draw-area {
     display: flex;
     flex-direction: row;
+    overflow-x: scroll;
+    padding : 10px 0;
 }
 div.element-Area div.element-details div.draw-area div.draw-column {
     width: fit-content;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
 }
 div.element-Area div.element-details div.draw-area div.draw-column div.match-card {
+    position: relative;
     background-color: var(--white);
     border: solid 1px var(--black);
     padding: 10px;
-    width: fit-content;
     width: 200px;
+    height: 80px;
+    margin: 5px 15px;
 }
 
-div.element-Area div.element-details div.draw-area div.draw-column div.match-card p[data-winner="false"] {
-    opacity : 0.75;
+div.element-Area div.element-details div.draw-area div.draw-column div.match-card p {
+    margin: 5px 0;
+}
+
+/* |||||||||||||||||||||||||||||||||| */
+/* BRANCHES POUR ARBORESCENCE DU DRAW */
+/* |||||||||||||||||||||||||||||||||| */
+div.element-Area div.element-details div.draw-area div.draw-column div.match-card span.draw-h-start-branch {
+    position: absolute;
+    align-self: center;
+    height: 0;
+    width: 15px;
+    border: solid 2px var(--black);
+    left: 100%;
+    bottom: calc(50% - 1px);
+}
+
+div.element-Area div.element-details div.draw-area div.draw-column div.match-card span.draw-v-branch {
+    position: absolute;
+    align-self: center;
+    height: 110px;
+    width: 0;
+    border: solid 2px var(--black);
+    bottom: 50%;
+    left: calc(100% + 15px);
+}
+
+div.element-Area div.element-details div.draw-area div.draw-column div.match-card span.draw-h-end-branch {
+    position: absolute;
+    align-self: center;
+    height: 0;  
+    width: 16px;
+    border: solid 2px var(--black);
+    top: calc(50% - 1px);
+}
+/* |||||||||||||||||||||||||||||||||| */
+/* |||||||||||||||||||||||||||||||||| */
+
+div.element-Area div.element-details div.draw-area div.draw-column div.match-card p[data-winner="true"] {
+    font-weight: 700;
 }
 
 div.element-Area div.element-details div.player-card,
@@ -44,6 +86,12 @@ div.element-Area div.element-details div.umpire-card div.umpire-infos {
     align-items: center;
     gap: 10px;
 }
+div.element-Area div.element-details div.player-card div.player-infos div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 div.element-Area div.element-details div.player-card div.player-infos img.player-flag {
     height: 20px;
     width: 30px;
@@ -56,3 +104,27 @@ div.element-Area div.element-details div.umpire-card button {
 }
 
 
+@media screen and (max-width: 768px) {
+
+    div.element-Area div.element-details div.player-card div.player-infos {
+        flex-direction: column;
+    }
+    div.element-Area div.element-details div.player-card div.player-infos div {
+        display: flex;
+        align-self: baseline;
+    }
+    div.element-Area div.element-details div.player-card div.player-infos p,
+    div.element-Area div.element-details div.player-card div.player-infos img,
+    div.element-Area div.element-details div.court-card div.court-infos p,
+    div.element-Area div.element-details div.umpire-card div.umpire-infos p {
+        margin: 5px;
+    }
+    
+    div.element-Area div.element-details div.player-card div.player-actions,
+    div.element-Area div.element-details div.court-card div.court-actions,
+    div.element-Area div.element-details div.umpire-card div.umpire-actions {
+        display: flex;
+        flex-direction: column;
+    }
+    
+}

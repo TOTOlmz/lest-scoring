@@ -87,7 +87,7 @@ CREATE TABLE `players` (
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `nationality` varchar(3) DEFAULT NULL,
-  `rank` int(11) DEFAULT NULL,
+  `rank` varchar(100) DEFAULT NULL,
   UNIQUE KEY `uk_players_id_to_display` (`id_to_display`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

@@ -36,6 +36,11 @@ class TournamentModel extends BaseModel {
         $sql = "SELECT * FROM tournaments WHERE director_id = :id";
         return $this->fetchAll($sql, ["id" => $id]);
     }
+    // Fonction permettant de récupérer les id des tournois liés à un directeur
+    public function getTournamentsIdsByDirectorId(int $id): ?array {
+        $sql = "SELECT id FROM tournaments WHERE director_id = :id";
+        return $this->fetchAll($sql, ["id" => $id]);
+    }
 
 
     // Fonction permettant de récupérer toutes les données d'un tournoi précis (via plusieurs requêtes pour un tableau multidimensionnel)
@@ -108,7 +113,7 @@ class TournamentModel extends BaseModel {
     }
 
     // Fonction permettant de récupérer un identifiant de tournoi via l'id_to_display
-    public function getTournamentIdByPublicId(string $publicId): ?string {
+    public function getTournamentIdByPublicId(string $publicId): ?int {
         $sql = "SELECT id FROM tournaments WHERE id_to_display = :publicId";
         return $this->fetchColumn($sql, ["publicId" => $publicId]);
     }

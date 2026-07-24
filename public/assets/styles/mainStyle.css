@@ -7,6 +7,7 @@
     --white: #ffffff;
     --grey: #d9d9d9;
     --black: #1E1014;
+    --overlay-bg: #00000050;
 
     /* Couleurs principales */
     --yellow: #FFEA00; 
@@ -34,7 +35,7 @@
 
 
 body {
-    background-color: var(--grey);
+    background-color: var(--white);
     font-family: var(--first-font), Arial, Helvetica;
     font-weight: 400;
     width: 100vw;
@@ -113,8 +114,8 @@ footer {
     background-color: var(--white);
     width: 80vw;
     margin: auto;
+    margin-top: 5vh;
     padding : 20px;
-    border: solid 2px var(--black);
 }
 
 
@@ -178,6 +179,7 @@ footer {
         border-radius: 0;
         padding : 20px;
         border: 0px;
+        margin-top: 0;
     }
     .button {
         padding: 10px 10px;

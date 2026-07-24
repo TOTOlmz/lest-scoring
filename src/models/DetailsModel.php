@@ -54,4 +54,88 @@ class DetailsModel extends BaseModel {
     }
 
 
+    /* FONCTIONS GÉRANT L'ÉDITION D'ÉLÉMENTS*/
+
+    // fonction en charge de l'édition de joueurs
+    public function editPlayer(int $id, string $fname, string $lname, string $nat, string $rank): bool {
+        $sql = "UPDATE players SET firstname = :fname, lastname = :lname, nationality = :nat, rank = :rank WHERE id = :id LIMIT 1";
+        $result = $this->executeQuery($sql, [
+            "fname" => $fname,
+            "lname" => $lname,
+            "nat" => $nat,
+            "rank" => $rank,
+            "id" => $id
+        ]);
+        return ($result) ? true : false;
+    }
+    // fonction en charge de l'édition de courts
+    public function editCourt(int $id, string $name, string $password): bool {
+        $sql = "UPDATE courts SET name = :name, password = :password WHERE id = :id LIMIT 1";
+        $result = $this->executeQuery($sql, [
+            "name" => $name,
+            "password" => $password,
+            "id" => $id
+        ]);
+        return ($result) ? true : false;
+    }
+    // fonction en charge de l'édition d'arbitres
+    public function editUmpire(int $id, string $uname, string $fname, string $lname): bool {
+        $sql = "UPDATE umpires SET username = :username, firstname = :firstname, lastname = :lastname WHERE id = :id LIMIT 1";
+        $result = $this->executeQuery($sql, [
+            "username" => $uname,
+            "firstname" => $fname,
+            "lastname" => $lname,
+            "id" => $id
+        ]);
+        return ($result) ? true : false;
+    }
+
+
+    // Fonction permettant de supprimer un joueur
+    public function deletePlayerById (int $id): ?string {
+        $sql = "DELETE * FROM players WHERE id = :id LIMIT 1";
+        try {
+            $result = $this->executeQuery($sql, ["id" => $id]) ? "OK" : "Échec de la suppression.";
+        } catch (\PDOException $e) {
+            try {
+                $sql = "UPDATE players SET firstname = :msg, lastname = '', nationality = '', rank = 0 WHERE id = :id";
+                $result = $this->executeQuery($sql, ["msg" => "personne retirée", ":id" => $id]) ? "OK r" : "Échec de la suppression.";
+            } catch (\PDOException $e) {
+                $result = 'Échec de la suppression : ' . $e->getMessage();
+            }
+        }
+        return $result;
+    }
+    // Fonction permettant de supprimer un court
+    public function deleteCourtById (int $id): ?string {
+        $sql = "DELETE * FROM courts WHERE id = :id LIMIT 1";
+        try {
+            $result = $this->executeQuery($sql, ["id" => $id]) ? "OK" : "Échec de la suppression.";
+        } catch (\PDOException $e) {
+            try {
+                $sql = "UPDATE courts SET name = :msg, password = '000' WHERE id = :id";
+                $result = $this->executeQuery($sql, ["msg" => "court supprimé", ":id" => $id]) ? "OK r" : "Échec de la suppression.";
+            } catch (\PDOException $e) {
+                $result = 'Échec de la suppression : ' . $e->getMessage();
+            }
+        }
+        return $result;
+    }
+    // Fonction permettant de supprimer un arbitre
+    public function deleteUmpireById (int $id): ?string {
+        $sql = "DELETE * FROM umpires WHERE id = :id LIMIT 1";
+        try {
+            $result = $this->executeQuery($sql, ["id" => $id]) ? "OK" : "Échec de la suppression.";
+        } catch (\PDOException $e) {
+            try {
+                $sql = "UPDATE umpires SET username = :msg, firstname = '', lastname = '' WHERE id = :id";
+                $result = $this->executeQuery($sql, ["msg" => "arbitre retirée", ":id" => $id]) ? "OK r" : "Échec de la suppression.";
+            } catch (\PDOException $e) {
+                $result = 'Échec de la suppression : ' . $e->getMessage();
+            }
+        }
+        return $result;
+    }
+
+
 }

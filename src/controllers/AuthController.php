@@ -118,7 +118,8 @@ class AuthController extends BaseController {
                 if (empty($this->errors)) {
                     try {
                         // On crée l'utilisateur
-                        $userId = $this->authModel->setUser($name, $email, $password, 'USER');        
+                        $publicId = $this->generatePublicCode("users", 16);
+                        $userId = $this->authModel->setUser($publicId, $name, $email, $password, 'USER');        
                         
                     } catch (PDOException $e) {
                         $this->errors[] = 'Erreur lors de la création du compte : ' . $e->getMessage();
@@ -170,7 +171,7 @@ class AuthController extends BaseController {
 
         if (empty($this->errors)) {
             // On démarre la session
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_public_id'] = $user['id_to_display'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_role'] = $user['role'];
 

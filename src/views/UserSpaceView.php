@@ -20,8 +20,22 @@
         <h1>Espace Directeur</h1>
         <pre><?php  // print_r($this->tournaments) ?></pre>
 
+        <?php foreach ($this->tournaments as $t): ?>
+            <div class="element-Area">
+                <div class="element-title">
+                    <h2><?= $t["club"] ?>, <?= $t["city"] ?> <em>(<?= $t["name"] ?>)</em></h2>
+                    <button class="element-details-button" isOpen="false">❯</button>
+                </div>
+                <div class="element-details" isOpen="false">
+                    <h3>Scores : </h3>
+                    <?php include ROOT_PATH . "/src/views/components/MatchesList.php"; ?>
+                
+                </div>
+                
+            </div>
+        <?php endforeach; ?>
 
-        <?php require_once ROOT_PATH . "/src/views/components/elementList.php"; ?>
+        <script src="./assets/scripts/elementList.js"> /* Script permettant de créer un système d'onglets pour les différents tournois */</script>
     </div>
 </body>
 </html>

@@ -15,6 +15,7 @@ class AdminSpaceController extends BaseController {
 
     protected array $tournaments = [];
     protected array $result = [];
+    protected int $userId = 0;
     protected TournamentModel $tournamentModel;
     protected AdminModel $adminModel;
 
@@ -56,7 +57,8 @@ class AdminSpaceController extends BaseController {
         
 
         // On récupère les tournois dont l'admin a la charge et on les adapte :
-        $directorTournaments = $this->tournamentModel->getTournamentsByDirectorId($_SESSION["user_id"]);
+        $this->userId = $this->tournamentModel->getIdByPublicId("users", $_SESSION["user_public_id"]);
+        $directorTournaments = $this->tournamentModel->getTournamentsByDirectorId($this->userId);
         foreach ($directorTournaments as $dt) {
             $this->tournaments[] = $this->tournamentModel->getAllTournamentDataById($dt["id"]);
 

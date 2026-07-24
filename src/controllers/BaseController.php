@@ -60,7 +60,7 @@ class BaseController {
 
     // Vérification de l'autorisation d'accès à une page
     public function checkAccessAutorisation(string $role) {
-        if (!isset($_SESSION) || !isset($_SESSION["user_id"])
+        if (!isset($_SESSION) || !isset($_SESSION["user_public_id"])
             || (!isset($_SESSION["user_role"]) && $_SESSION["user_role"] !== $role)) { 
             $this->logout();
             header('Location: ./');
@@ -126,7 +126,7 @@ class BaseController {
     }
 
     // Fonction permettant de générer un code utilisable pour identifier un élément via les paramètres d'url
-    public function generatePublicCode(string $table, int $length = 8): string {
+    public function generatePublicCode(string $table, int $length = 16): string {
         
         // On crée une chaine comportant toutes les lettres en MAJ et en min ainsi que tous les chiffres
         $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

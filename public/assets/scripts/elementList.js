@@ -1,11 +1,22 @@
-const tournaments = document.querySelectorAll(".element-Area");
+let elList = document.querySelectorAll(".element-Area");
 
-tournaments.forEach( tournament => {
-    const button = tournament.querySelector(".element-details-button");
-    const courtsArea = tournament.querySelector(".element-details");
+elList.forEach( list => {
+    const button = list.querySelector(".element-details-button");
+    let courtsArea = list.querySelector(".element-details");
+    const titleArea = list.querySelector(".element-title");
     button.addEventListener("click", () => {
         const isOpen = button.getAttribute("isOpen") === "true";
-        button.setAttribute("isOpen", !isOpen);
+        button.setAttribute("transition", "true");
         courtsArea.setAttribute("isOpen", !isOpen);
+        setTimeout(() => {
+            button.setAttribute("transition", "false");
+            button.setAttribute("isOpen", !isOpen);
+        }, 250);
+
+        if (!isOpen) {
+            courtsArea.style.maxHeight = (parseInt(courtsArea.scrollHeight + 30)) + "px";
+        } else {
+            courtsArea.style.maxHeight = "0px";
+        }
     });
 });
