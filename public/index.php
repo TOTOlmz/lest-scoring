@@ -65,6 +65,7 @@ use App\controllers\AuthController;
 use App\controllers\UserSpaceController;
 use App\controllers\AdminSpaceController;
 use App\controllers\TournamentDetailsController;
+use App\controllers\TournamentEditController;
 
 // Récupération de l'URI de la requête (sans les query parameters)
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -94,14 +95,17 @@ switch ($uri) {
     case "/deconnexion":
         new AuthController()->logout();
         break;
-    case "/details":
-        new TournamentDetailsController()->rendered();
-        break;
     case "/espace-admin":
         new AdminSpaceController()->rendered();
         break;
     case "/mon-espace":
         new UserSpaceController()->rendered();
+        break;
+    case "/details":
+        new TournamentDetailsController()->rendered();
+        break;
+    case "/edit":
+        new TournamentEditController()->rendered();
         break;
     default:
         new HomeController()->rendered();

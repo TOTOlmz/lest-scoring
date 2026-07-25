@@ -17,6 +17,20 @@ class AdminModel extends BaseModel {
         return $this->lastInsert($sql, ['public_id' => $publicId,'email' => $email, 'password' => $password, "role" => "DIRECTOR"]);
     }
 
+    // Fonction permettant de modifier les informations d'un utilsateur (directeur)
+    public function editDirector(int $id, string $name, string $email, string $role, int $perm, int $susp): ?bool {
+        $sql = 'UPDATE users SET name = :name, email = :email, role = :role, is_permanent = :perm, is_suspended = :susp WHERE id = :id';
+        $params = [
+            "id" => $id,
+            "name" => $name,
+            "email" => $email,
+            "role" => $role,
+            "perm" => $perm,
+            "susp" => $susp
+        ];
+        return $this->executeQuery($sql, $params) ? true : false;
+    }
+
     // Fonction permettant de vérifier l'unicité d'un email
     public function emailExists(string $email): ?int {
         $sql = "SELECT id FROM users WHERE email = :email LIMIT 1";

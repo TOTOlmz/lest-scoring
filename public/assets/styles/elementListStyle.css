@@ -71,11 +71,9 @@ div.element-Area div.element-details[isOpen=true] {
     padding: 15px;
 }
 
-div.element-Area div.element-details a.button {
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin-top: 0;
+div.element-Area div.element-details div.details-action-buttons {
+    display: flex;
+    width: fit-content;
 }
 
 div.matches {
@@ -190,4 +188,8 @@ div.matches div.one-match div.match-time {
     }
     div.element-title h2 span.tournament-full-dates { display: none; }
     div.element-title h2 span.tournament-short-dates { display: block ; }
+
+    div.element-Area div.element-details div.details-action-buttons {
+        flex-direction: column;
+    }
 }

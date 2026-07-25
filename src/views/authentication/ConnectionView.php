@@ -29,13 +29,15 @@
     </div>
 
 
-<script>
-    let button = document.querySelector('.connection-form button[type="submit"]');
-    let input = document.querySelector('.connection-form input');
-    button.style.width = input.offsetWidth - 10 + 'px';
-    button.style.textAlign = 'center';
-</script>
+    <?php require_once ROOT_PATH . "/src/views/components/footer.php"; ?>
+    <script>
+        let button = document.querySelector('.connection-form button[type="submit"]');
+        let input = document.querySelector('.connection-form input');
+        button.style.width = input.offsetWidth - 10 + 'px';
+        button.style.textAlign = 'center';
+    </script>
     
+
 
 </body>
 </html>

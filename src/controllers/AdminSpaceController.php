@@ -41,6 +41,13 @@ class AdminSpaceController extends BaseController {
             $this->addDirector($_POST);
         }
 
+        // Si le formulaire d'édition de directeur est envoyé :
+        if (isset($_POST) && isset($_POST["edit-director"])) {
+            $token = isset($_POST["token"]) ? $_POST["token"] : "";
+            $this->checkCsrfToken($token);
+            $this->editDirector($_POST);
+        }
+
         // Si le formulaire de création de tournoi est soumis :
         if (isset($_POST) && isset($_POST["create-tournament"])) {
             $token = isset($_POST["token"]) ? $_POST["token"] : "";
@@ -54,7 +61,6 @@ class AdminSpaceController extends BaseController {
             $this->checkCsrfToken($token);
             $this->research($_POST);
         }
-        
 
         // On récupère les tournois dont l'admin a la charge et on les adapte :
         $this->userId = $this->tournamentModel->getIdByPublicId("users", $_SESSION["user_public_id"]);
@@ -106,6 +112,61 @@ class AdminSpaceController extends BaseController {
         }
     }
 
+    private function editDirector(array $post): void {
+        // On réédite le token CSRF
+        $this->editToken();
+
+        // On récupère les différentes valeurs
+        $publicId = isset($post["public-id"]) ? $post["public-id"] : "";
+        $name = isset($post["name"]) ? $post["name"] : "";
+        $email = isset($post["email"]) ? $post["email"] : "";
+        $role = isset($post["role"]) ? $post["role"] : "";
+        $tempPerm = isset($post["permanent"]) ? $post["permanent"] : "";
+        $tempSusp = isset($post["suspended"]) ? $post["suspended"] : "";
+
+        
+        $dirId = $this->tournamentModel->getIdByPublicId("users", $publicId);
+        if ($dirId <= 0) {
+            $this->errors[] = "Impossible de récupérer l'identifiant de l'utilisateur. Mise à jour arrêtée.";
+        }
+
+        // On vérifie l'email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->errors[] = "Merci de reneigner une adresse email valide.";
+        }
+        // On s'assure qu'il soit bien unnique
+        $isExisting = $this->adminModel->emailExists($email);
+        if (empty($this->errors) && $isExisting !== $dirId) {
+            $this->errors[] = "L'adresse email correspond déjà à un autre directeur" . (is_int($isExisting) ? " avec l'id : " . $isExisting . "." : ".");
+        }
+        // on vérifie que toutes les valeurs sont présentes
+        if (!$publicId || !$name || !$email || !$role) {
+            $this->errors[] = "Impossible de modifier l'utilisateur. Des valeurs sont manquantes.";
+        }
+        if (($tempPerm == "on" || $tempPerm == 0) && ($tempSusp == "on" || $tempSusp == 0)) {
+            $this->errors[] = "Impossible de modifier l'utilisateur. Les valeurs 'permanent' et 'suspendu' sont incorrectes.";
+        }
+        $perm = $tempPerm === "on" ? 1 : 0;
+        $susp = $tempSusp === "on" ? 1 : 0;
+
+        $acceptedRoles = ["DIRECTOR", "ADMIN", "USER", "UMPIRE"];
+        if (!in_array($role, $acceptedRoles)) {
+            $this->errors[] = "Impossible de modifier l'utilisateur, le role attribué n'est pas acceptable.";
+        }
+
+        
+        if (empty($this->errors)) {
+            if ($this->adminModel->editDirector($dirId, $name, $email, $role, $perm, $susp)) {
+                $this->success = "Mise à jour réussie.";
+            } else {
+                $this->errors[] = "Erreur rencontrée lors de la mise à jour, veuillez réessayer.";
+            }
+        }
+
+
+
+
+    }
 
     // Fonction permettant d'ajouter un tournoi
     private function addTournament(array $post): void {

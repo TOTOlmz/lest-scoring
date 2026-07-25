@@ -27,6 +27,10 @@
                     <button class="element-details-button" isOpen="false">❯</button>
                 </div>
                 <div class="element-details" isOpen="false">
+                    <div class="details-action-buttons">
+                        <a class="button" href="./details?tournament=<?= $t["id_to_display"] ?>">Détails</a>
+                        <a class="button" href="./edit?tournament=<?= $t["id_to_display"] ?>">Éditer</a>
+                    </div>
                     <h3>Scores : </h3>
                     <?php include ROOT_PATH . "/src/views/components/MatchesList.php"; ?>
                 

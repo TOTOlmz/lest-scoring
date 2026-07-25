@@ -28,7 +28,7 @@ class BaseController {
             if ($_SESSION["user_role"] === "ADMIN") {
                 $this->isAdmin = true;
             }
-            if ($_ENV["app_uri"] === "/mon-epace" || $_ENV["app_uri"] === "/espace-admin") {
+            if ($_ENV["app_uri"] === "/mon-espace" || $_ENV["app_uri"] === "/espace-admin") {
                 $this->isInUserSpace = true;
             }
         }

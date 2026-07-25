@@ -19,7 +19,7 @@
     ?>
 
     <div class="centered-div">
-        <h1>Accueil</h1>
+        <h1>Liste des tournois actuels</h1>
         <pre><?php  // print_r($this->tournaments) ?></pre>
 
         <?php foreach ($this->tournaments as $t): ?>
@@ -33,7 +33,9 @@
                     <button class="element-details-button" isOpen="false">❯</button>
                 </div>
                 <div class="element-details" isOpen="false">
-                    <a class="button" href="./details?tournament=<?= $t["id_to_display"] ?>">Détails</a>
+                    <div class="details-action-buttons">
+                        <a class="button" href="./details?tournament=<?= $t["id_to_display"] ?>">Détails</a>
+                    </div>
                     <h3>Scores : </h3>
                     <?php include ROOT_PATH . "/src/views/components/MatchesList.php"; ?>
                 

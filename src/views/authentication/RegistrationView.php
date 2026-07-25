@@ -52,6 +52,7 @@
     
 
     <script src="./assets/scripts/AuthRegistration.js"></script>
+    <?php require_once ROOT_PATH . "/src/views/components/footer.php"; ?>
 </body>
 </html>
 

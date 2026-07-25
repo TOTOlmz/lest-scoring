@@ -1,16 +1,23 @@
 
 
 <?php /* Section permettant d'accéder au formulaire de contact */ ?>
+<link rel="stylesheet" href="./assets/styles/contactOverlayStyle.css">
 
 <div class="overlay contact-overlay">
     <div class="pop-up">
         <h3>Contactez-nous</h3>
-        <form action="" method="POST" class="question-creation-form">
+        <form action="" method="POST" class="contact-form">
+            <input type="text" name="token" value="<?= isset($_SESSION["token"]) ? htmlspecialchars($_SESSION["token"]) : ""; ?>" hidden required>
+            <?php if (isset($_SESSION["user_email"])): ?>
+            <input type="text" id="name" name="name" value="<?= $_SESSION["user_name"] ?>" required>
+            <input type="email" id="email" name="email" value="<?= $_SESSION["user_email"] ?>" required>
+            <?php else: ?>
             <input type="text" id="name" name="name" placeholder="Votre nom" required>
             <input type="email" id="email" name="email" placeholder="Votre email" required>
+            <?php endif; ?>
             <textarea id="message" name="message" rows="4" placeholder="Votre message" required></textarea>
 
-            <button type="submit" class="button">Envoyer</button>
+            <button type="submit" name="contact-form" class="button">Envoyer</button>
         </form>
     </div>
 </div>

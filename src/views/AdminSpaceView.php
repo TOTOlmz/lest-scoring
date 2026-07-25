@@ -7,6 +7,7 @@
     <?php // On appelle les styles ?>
     <link rel="stylesheet" href="./assets/styles/mainStyle.css">
     <link rel="stylesheet" href="./assets/styles/adminStyle.css">
+    <link rel="stylesheet" href="./assets/styles/overlayStyle.css">
     <title>LEST-scoring</title>
 </head>
 <body>
@@ -66,5 +67,8 @@
     <?php
         require_once ROOT_PATH . "/src/views/components/footer.php";
     ?>
+
+    <script> const currentToken = <?= json_encode($_SESSION["token"]); ?>; </script>
+    <script src="./assets/scripts/editDirectorOverlay.js" type="module"></script>
 </body>
 </html>

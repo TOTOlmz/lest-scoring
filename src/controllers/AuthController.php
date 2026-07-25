@@ -172,6 +172,7 @@ class AuthController extends BaseController {
         if (empty($this->errors)) {
             // On démarre la session
             $_SESSION['user_public_id'] = $user['id_to_display'];
+            $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_role'] = $user['role'];
 

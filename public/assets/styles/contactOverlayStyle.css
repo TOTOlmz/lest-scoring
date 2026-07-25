@@ -1,0 +1,52 @@
+div.contact-overlay {
+    background-color: var(--overlay-bg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.contact-overlay div.pop-up {
+    background-color: var(--white);
+    position: relative;
+    width: 50%;
+    padding: 20px;
+    border: none;
+    border: solid 1px var(--black);
+    box-shadow: 5px 5px 0 var(--black),
+                5px -5px 0 var(--black);
+}
+
+div.contact-overlay div.pop-up button.overlayButton {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+div.contact-overlay div.pop-up form.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+div.contact-overlay div.pop-up form.contact-form label {
+    display: flex;
+    flex-direction: column;
+}
+
+div.contact-overlay div.pop-up form.contact-form input,
+div.contact-overlay div.pop-up form.contact-form textarea {
+    padding: 10px;
+    width: 90%;
+    border: solid 1px var(--black);
+    margin: 2px;
+    height: 20px;
+}
+
+div.contact-overlay div.pop-up form.contact-form button {
+    width: fit-content;
+}
