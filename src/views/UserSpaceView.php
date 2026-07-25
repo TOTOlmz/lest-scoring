@@ -37,5 +37,7 @@
 
         <script src="./assets/scripts/elementList.js"> /* Script permettant de créer un système d'onglets pour les différents tournois */</script>
     </div>
+
+    <?php require_once ROOT_PATH . "/src/views/components/footer.php"; ?>
 </body>
 </html>

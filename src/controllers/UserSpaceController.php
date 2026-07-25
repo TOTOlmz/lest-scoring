@@ -27,7 +27,8 @@ class UserSpaceController extends BaseController {
         // Si personne ne semble connecter ou si l'utilisateur n'est pas directeur, on détruit la session par sécurité
         $this->checkAccessAutorisation("DIRECTOR");
         
-        $directorTournaments = $this->tournamentModel->getTournamentsByDirectorId($_SESSION["user_id"]);
+        $userId = $this->tournamentModel->getIdByPublicId("users", $_SESSION["user_public_id"]);
+        $directorTournaments = $this->tournamentModel->getTournamentsByDirectorId($userId);
         foreach ($directorTournaments as $dt) {
             $this->tournaments[] = $this->tournamentModel->getAllTournamentDataById($dt["id"]);
 

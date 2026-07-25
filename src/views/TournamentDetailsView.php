@@ -19,6 +19,8 @@
     ?>
 
     <div class="centered-div">
+
+        <p><?= $this->userStatus . " ← user status |:| authorisation utilisateur → " . $this->userAuthorisation ?></p>
         
         <h1><?= $this->tournament["club"] ?>, <?= $this->tournament["city"] ?> <em>(<?= $this->tournament["name"] ?>)</em></h1>
 
@@ -104,17 +106,19 @@
                             <?php endif; ?>
                             </div>
                         </div>
-                        <div class="player-actions">
-                            <button class="button edit-player-btn" data-id="<?= $player["id_to_display"] ?>" 
-                            player-fname="<?= $player["firstname"] ?>" player-lname="<?= $player["lastname"] ?>" 
-                            player-nat="<?= $player["nationality"] ?>" player-rank="<?= $player["rank"] ?>" 
-                            overlay-call="edit" data-element="player">✎</button>
+                        <?php if ($this->userAuthorisation): ?>
+                            <div class="player-actions">
+                                <button class="button edit-player-btn" data-id="<?= $player["id_to_display"] ?>" 
+                                player-fname="<?= $player["firstname"] ?>" player-lname="<?= $player["lastname"] ?>" 
+                                player-nat="<?= $player["nationality"] ?>" player-rank="<?= $player["rank"] ?>" 
+                                overlay-call="edit" data-element="player">✎</button>
 
-                            <button class="button delete-player-btn" data-id="<?= $player["id_to_display"] ?>" 
-                            player-fname="<?= $player["firstname"] ?>" player-lname="<?= $player["lastname"] ?>"
-                            overlay-call="delete" data-element="player"
-                            player-id="<?= $player["id_to_display"] ?>">✖</button>
-                        </div>
+                                <button class="button delete-player-btn" data-id="<?= $player["id_to_display"] ?>" 
+                                player-fname="<?= $player["firstname"] ?>" player-lname="<?= $player["lastname"] ?>"
+                                overlay-call="delete" data-element="player"
+                                player-id="<?= $player["id_to_display"] ?>">✖</button>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -134,14 +138,16 @@
                         
                         <p><?= ucfirst($court["name"]) ?></p>
                         </div>
-                        <div class="court-actions">
-                            <button class="button edit-court-btn" data-id="<?= $court["id_to_display"] ?>"
-                            court-name="<?= $court["name"] ?>" court-pass="<?= $court["password"] ?>" 
-                            overlay-call="edit" data-element="court">✎</button>
+                        <?php if ($this->userAuthorisation): ?>
+                            <div class="court-actions">
+                                <button class="button edit-court-btn" data-id="<?= $court["id_to_display"] ?>"
+                                court-name="<?= $court["name"] ?>" court-pass="<?= $court["password"] ?>" 
+                                overlay-call="edit" data-element="court">✎</button>
 
-                            <button class="button delete-court-btn" data-id="<?= $court["id_to_display"] ?>" court-name="<?= $court["name"] ?>" 
-                            overlay-call="delete" data-element="court">✖</button>
-                        </div>
+                                <button class="button delete-court-btn" data-id="<?= $court["id_to_display"] ?>" court-name="<?= $court["name"] ?>" 
+                                overlay-call="delete" data-element="court">✖</button>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -161,17 +167,19 @@
 
                         <p><?= ucfirst($umpire["firstname"]) ?> <?= strtoupper($umpire["lastname"]) ?> (<?= $umpire["username"] ?>)</p>
                         </div>
-                        <div class="umpire-actions">
-                            <button class="button edit-umpire-btn" data-id="<?= $umpire["id_to_display"] ?>" 
-                            umpire-uname="<?= $umpire["username"] ?>"
-                            umpire-fname="<?= $umpire["firstname"] ?>" umpire-lname="<?= $umpire["lastname"] ?>"
-                            overlay-call="edit" data-element="umpire">✎</button>
+                        <?php if ($this->userAuthorisation): ?>
+                            <div class="umpire-actions">
+                                <button class="button edit-umpire-btn" data-id="<?= $umpire["id_to_display"] ?>" 
+                                umpire-uname="<?= $umpire["username"] ?>"
+                                umpire-fname="<?= $umpire["firstname"] ?>" umpire-lname="<?= $umpire["lastname"] ?>"
+                                overlay-call="edit" data-element="umpire">✎</button>
 
-                            <button class="button delete-umpire-btn" data-id="<?= $umpire["id_to_display"] ?>" 
-                            umpire-uname="<?= $umpire["username"] ?>"
-                            umpire-fname="<?= $umpire["firstname"] ?>" umpire-lname="<?= $umpire["lastname"] ?>"
-                            overlay-call="delete" data-element="umpire">✖</button>
-                        </div>
+                                <button class="button delete-umpire-btn" data-id="<?= $umpire["id_to_display"] ?>" 
+                                umpire-uname="<?= $umpire["username"] ?>"
+                                umpire-fname="<?= $umpire["firstname"] ?>" umpire-lname="<?= $umpire["lastname"] ?>"
+                                overlay-call="delete" data-element="umpire">✖</button>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>

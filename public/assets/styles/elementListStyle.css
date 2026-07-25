@@ -12,10 +12,13 @@ div.element-title {
 }
 div.element-title h2 {
     padding-left: 10px;
+    width: 80%;
 }
 div.element-title h2 em {
     opacity: 0.50;
 }
+div.element-title h2 span.tournament-full-dates { display: contents; }
+div.element-title h2 span.tournament-short-dates { display: none ; }
 
 
 div.element-Area button.element-details-button[isOpen] {
@@ -50,6 +53,7 @@ div.element-Area button.element-details-button[isOpen=true] {
 }
 
 div.element-Area  div.element-details {
+    position: relative;
     border: solid 2px var(--black);
     border-top: none;
     width: 100%;
@@ -67,6 +71,12 @@ div.element-Area div.element-details[isOpen=true] {
     padding: 15px;
 }
 
+div.element-Area div.element-details a.button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 0;
+}
 
 div.matches {
     display: flex;
@@ -169,4 +179,15 @@ div.matches div.one-match div.match-time {
     padding-right: 2px;
     color: var(--white);
     text-align: right;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    div.element-title h2 {
+        display: flex;
+        flex-direction: column;
+    }
+    div.element-title h2 span.tournament-full-dates { display: none; }
+    div.element-title h2 span.tournament-short-dates { display: block ; }
 }

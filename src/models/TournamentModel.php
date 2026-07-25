@@ -26,9 +26,14 @@ class TournamentModel extends BaseModel {
     }
 
     // Fonction permettant de récupérer les tournois d'une date précise
-    public function getTournamentsByDate(string $time): ?array {
-        $sql = "SELECT * FROM tournaments WHERE start_time <= :current_time AND end_time >= current_time";
+    public function getTournamentsByDate(int $time): ?array {
+        $sql = "SELECT * FROM tournaments WHERE start_time <= :current_time AND end_time >= :current_time";
         return $this->fetchAll($sql, ["current_time" => $time]);
+    }
+    // Fonction permettant de récupérer l'id des tournois via une date précise
+    public function getTournamentsIdByDate(int $time): ?array {
+        $sql = "SELECT id FROM tournaments WHERE start_time <= :current_time AND end_time >= :current_time";
+        return $this->fetchAllColumn($sql, ["current_time" => $time]);
     }
 
     // Fonction permettant de récupérer les tournois liés à un directeur
@@ -39,7 +44,7 @@ class TournamentModel extends BaseModel {
     // Fonction permettant de récupérer les id des tournois liés à un directeur
     public function getTournamentsIdsByDirectorId(int $id): ?array {
         $sql = "SELECT id FROM tournaments WHERE director_id = :id";
-        return $this->fetchAll($sql, ["id" => $id]);
+        return $this->fetchAllColumn($sql, ["id" => $id]);
     }
 
 

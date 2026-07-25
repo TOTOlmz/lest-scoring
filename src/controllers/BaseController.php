@@ -71,8 +71,13 @@ class BaseController {
 
     // Fonction permettant de traiter les informations d'un tableau de tournois
     public function processTournaments(array $tournaments): array {
-
+        // cette fonction traite les tournois récupérés avec tournamentModel -> getAllTournamentDataById()
         foreach ($tournaments as $ti => $t) {
+            // On adapte les timestamps des dates de tournoi
+
+            $tournaments[$ti]["start_time"] = date("d/m/y", $t["start_time"]);
+            $tournaments[$ti]["end_time"] = date("d/m/y", $t["end_time"]);
+
             foreach ($t["courts"] as $ci => $c) {
                 foreach ($c["matches"] as $mi => $m) {
                     

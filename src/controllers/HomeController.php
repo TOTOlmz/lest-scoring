@@ -12,6 +12,7 @@ use App\models\TournamentModel;
 
 class HomeController extends BaseController {
 
+    protected array $tournaments = [];
     protected TournamentModel $tournamentModel;
     
 
@@ -23,8 +24,18 @@ class HomeController extends BaseController {
 
     // Fonction principale pour afficher la page d'accueil
     public function rendered(): void {
-        $currentTournament = $this->tournamentModel->getAllTournamentDataById(1);
-        // echo "<pre>"; print_r($currentTournament); echo "</pre>";
+
+        $getTournaments = $this->tournamentModel->getTournamentsIdByDate(time());
+        $tournData = [];
+        foreach ($getTournaments as $i => $t) {
+            $tournData[$i] = $this->tournamentModel->getAllTournamentDataById($t);
+            //echo "<pre>"; print_r($tournData); echo "</pre>";
+        }
+        
+        $this->tournaments = $this->processTournaments($tournData);
+        //echo "<pre>"; print_r($this->tournaments); echo "</pre>";
+
+
         require_once ROOT_PATH . '/src/views/HomeView.php';
     }   
 

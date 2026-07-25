@@ -43,10 +43,12 @@ class TournamentDetailsController extends BaseController {
         if (isset($_SESSION) && isset($_SESSION["user_role"])) {
             $this->userStatus = $_SESSION["user_role"];
 
-            
+            // L'admin doit pouvoir éditer tous les tournois            
             if ($this->userStatus === "ADMIN") {
                 $this->userAuthorisation = true;
-            } else {
+            
+            // Et un directeur doit pouvoir le faire également pour ses tournois
+            } elseif ($this->userStatus === "DIRECTOR") {
                 $currentUserId = $this->tournamentModel->getIdByPublicId("users", $_SESSION["user_public_id"]);
                 $userTournaments = $this->tournamentModel->getTournamentsIdsByDirectorId($currentUserId);
                 if (in_array($this->tournamentId, $userTournaments)) {
