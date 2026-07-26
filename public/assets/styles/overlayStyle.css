@@ -50,7 +50,8 @@ div#popupDiv form.popup-form textarea {
     box-sizing: content-box;
 }
 
-div#popupDiv form.popup-form div.checkboxes {
+div#popupDiv form.popup-form div.checkboxes,
+div#popupDiv form.popup-form div.dates {
     margin: 5px 0;
     display: flex;
     flex-direction: row;
@@ -59,8 +60,12 @@ div#popupDiv form.popup-form div.checkboxes {
 div#popupDiv form.popup-form label.checkbox-label {
     flex-direction: row;
 }
-div#popupDiv form.popup-form label.checkbox-label input {
+div#popupDiv form.popup-form label.checkbox-label input,
+div#popupDiv form.popup-form label.dates-label input {
     width: auto;
+}
+div#popupDiv form.popup-form div.dates label.dates-label {
+    display: block;
 }
 
 div#popupDiv form.popup-form button {
@@ -69,7 +74,19 @@ div#popupDiv form.popup-form button {
 
 @media screen and (max-width: 768px) {
     
-    div#popupDiv form.popup-form div.checkboxes {
-    display: block;
-}
+    div#popupDiv form.popup-form div.checkboxes,
+    div#popupDiv form.popup-form div.dates {
+        display: block;
+    }
+
+    div#popupDiv form.popup-form div.dates label.dates-label {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    div#popupDiv form.popup-form div.dates input {
+        width: fit-content;
+    }
 }

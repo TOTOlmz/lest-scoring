@@ -61,7 +61,7 @@ class BaseController {
     // Vérification de l'autorisation d'accès à une page
     public function checkAccessAutorisation(string $role) {
         if (!isset($_SESSION) || !isset($_SESSION["user_public_id"])
-            || (!isset($_SESSION["user_role"]) && $_SESSION["user_role"] !== $role)) { 
+            || (isset($_SESSION["user_role"]) && $_SESSION["user_role"] !== $role)) { 
             $this->logout();
             header('Location: ./');
             exit();
@@ -75,8 +75,8 @@ class BaseController {
         foreach ($tournaments as $ti => $t) {
             // On adapte les timestamps des dates de tournoi
 
-            $tournaments[$ti]["start_time"] = date("d/m/y", $t["start_time"]);
-            $tournaments[$ti]["end_time"] = date("d/m/y", $t["end_time"]);
+            $tournaments[$ti]["start_time"] = date("d/m/y", intval($t["start_time"]));
+            $tournaments[$ti]["end_time"] = date("d/m/y", intval($t["end_time"]));
 
             foreach ($t["courts"] as $ci => $c) {
                 foreach ($c["matches"] as $mi => $m) {
@@ -131,7 +131,7 @@ class BaseController {
     }
 
     // Fonction permettant de générer un code utilisable pour identifier un élément via les paramètres d'url
-    public function generatePublicCode(string $table, int $length = 16): string {
+    public function generatePublicCode(string $table, int $length = 11): string {
         
         // On crée une chaine comportant toutes les lettres en MAJ et en min ainsi que tous les chiffres
         $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

@@ -12,12 +12,14 @@ class TournamentModel extends BaseModel {
 
 
     // Fonction permettant d'ajouter un tournoi
-    public function setTournament(string $publicId, string $name, string $sTime, string $eTime, int $directorId): ?int {
-        $sql = "INSERT INTO tournaments (id_to_display, name, start_time, end_time, director_id) 
-        VALUES (:public_id, :name, :start_time, :end_time, :director_id)";
+    public function setTournament(string $publicId, string $name, int $sTime, int $eTime, int $directorId, ?string $city, ?string $club): ?int {
+        $sql = "INSERT INTO tournaments (id_to_display, name, city, club, start_time, end_time, director_id) 
+        VALUES (:public_id, :name, :city, :club, :start_time, :end_time, :director_id)";
         $params = [
             "public_id" => $publicId,
             "name" => $name,
+            "city" => $city,
+            "club" => $club,
             "start_time" => $sTime,
             "end_time" => $eTime,
             "director_id" => $directorId

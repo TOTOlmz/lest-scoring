@@ -7,6 +7,7 @@
     <?php // On appelle les styles ?>
     <link rel="stylesheet" href="./assets/styles/mainStyle.css">
     <link rel="stylesheet" href="./assets/styles/elementListStyle.css">
+    <link rel="stylesheet" href="./assets/styles/overlayStyle.css">
     <title>LEST-scoring</title>
 </head>
 <body>
@@ -20,6 +21,8 @@
         <h1>Espace Directeur</h1>
         <pre><?php  // print_r($this->tournaments) ?></pre>
 
+        <button class="button add-tournament" >Créer un tournoi</button>
+        <h2>Liste des tournois actuels</h2>
         <?php foreach ($this->tournaments as $t): ?>
             <div class="element-Area">
                 <div class="element-title">
@@ -43,5 +46,9 @@
     </div>
 
     <?php require_once ROOT_PATH . "/src/views/components/footer.php"; ?>
+    
+    <script> const currentToken = <?= json_encode($_SESSION["token"]); ?>; </script>
+    <script> const dirId = <?= json_encode($_SESSION["user_public_id"]); ?>; </script>
+    <script src="./assets/scripts/addTournamentOverlay.js" type="module"></script>
 </body>
 </html>
