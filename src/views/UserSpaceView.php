@@ -34,9 +34,12 @@
                         <a class="button" href="./details?tournament=<?= $t["id_to_display"] ?>">Détails</a>
                         <a class="button" href="./edit?tournament=<?= $t["id_to_display"] ?>">Éditer</a>
                     </div>
+                    <?php if (!empty($t["courts"])): ?>
                     <h3>Scores : </h3>
                     <?php include ROOT_PATH . "/src/views/components/MatchesList.php"; ?>
-                
+                    <?php else: ?>
+                        <p>Le tournoi ne possède pas encore de données</p>
+                    <?php endif; ?>
                 </div>
                 
             </div>
