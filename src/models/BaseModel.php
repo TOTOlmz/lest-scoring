@@ -119,7 +119,7 @@ abstract class BaseModel {
         return $result == 0;
     }
 
-    public function getIdByPublicId (string $table, string $pid): int {
+    public function getIdByPublicId (string $table, string $pid): ?int {
         $sql = "SELECT id FROM {$table} WHERE id_to_display = :pid";
         return $this->fetchColumn($sql, ["pid" => $pid]);
     }

@@ -11,7 +11,31 @@ addEltBtns.forEach(addButton => {
         createOverlay();
         console.log("Overlay appelé : " + buttonElement);
 
-        if (buttonElement === "court") {
+        if (buttonElement === "tournament") {
+
+            const idToDisplay = addButton.getAttribute("data-id_to_display");
+            const name = addButton.getAttribute("data-name");
+            const club = addButton.getAttribute("data-club");
+            const city = addButton.getAttribute("data-city");
+            const start = addButton.getAttribute("data-start");
+            const end = addButton.getAttribute("data-end");
+            console.log(start, end);
+        
+            document.getElementById('popupDiv').innerHTML =
+            `<h3>Éditer le tournoi : </h3>
+            <form action="" method="POST" class="popup-form">
+                <input type="text" name="token" value="${currentToken}" hidden/>
+                <input type="text" name="id_to_display" value="${idToDisplay}" hidden/>
+                <label>Nom : <input type="text" name="name" value="${name}" required/></label>
+                <label>Club : <input type="text" name="club" value="${club}" required/></label>
+                <label>Ville : <input type="text" name="city" value="${city}" required/></label>
+                <label>Date de début : <input type="date" name="start" value="${start}" required/></label>
+                <label>Date de fin : <input type="date" name="end" value="${end}" required/></label>
+                <button type="submit" name="edit-tourn" class="button">Éditer</button>
+            </form>`;
+
+
+        } else if (buttonElement === "court") {
 
             document.getElementById('popupDiv').innerHTML =
             `<h3>Ajouter un court : </h3>

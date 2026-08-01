@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\controllers;
 use App\Models\TournamentModel;
 use App\Models\DetailsModel;
+use App\Models\EditTournModel;
 /**
  * UserSpaceController
  * 
@@ -21,10 +22,12 @@ class TournamentEditController extends BaseController {
     protected array $tournaments = []; // Utile uniquement pour appeller src/views/components/tournamentsList.php
     protected TournamentModel $tournamentModel;
     protected DetailsModel $detailsModel;
+    protected EditTournModel $editTournModel;
 
     public function __construct() {
         $this->tournamentModel = new TournamentModel;
         $this->detailsModel = new DetailsModel;
+        $this->editTournModel = new EditTournModel;
         $this->checkConnectedStatus();
     }
 
@@ -64,11 +67,13 @@ class TournamentEditController extends BaseController {
 
 
 
-        // Si le formulaire de suppression d'arbitre est soumis :
-        if (isset($_POST) && isset($_POST["add-tournament"])) {
-            echo "yes";
+        // Si le formulaire d'édition du tournoi est soumi :
+        if (isset($_POST) && isset($_POST["edit-tourn"])) {
             $token = isset($_POST["token"]) ? $_POST["token"] : "";
             $this->checkCsrfToken($token);
+            if (empty($this->errors)) {
+                $this->editTourn($_POST);
+            }
         }
 
 
@@ -119,6 +124,63 @@ class TournamentEditController extends BaseController {
             }
             unset($round);
         }
+
+    }
+
+    // Fonction permettant d'éditer un tournoi (le mettre à jour en fonction des éléments nvoyés par l'utilisateur)
+    private function editTourn(array $post): void {
+        $name = isset($post["name"]) ? $post["name"] : "";
+        $club = isset($post["club"]) ? $post["club"] : "";
+        $city = isset($post["city"]) ? $post["city"] : "";
+        $start = isset($post["start"]) ? $post["start"] : "";
+        $end = isset($post["end"]) ? $post["end"] : "";
+        $tournPId = isset($post["id_to_display"]) ? $post["id_to_display"] : "";
+        $tournId = 0;
+
+        // On récupère l'id de l'utilisateur
+        $pId = $_SESSION["user_public_id"];
+        if (!$pId) {
+            return;
+        }
+        $userId = $this->tournamentModel->getIdByPublicId("users", $pId);
+        if (!$userId) {
+            return;
+        }
+
+        if (!$tournPId || !$name || !$club || !$city || !$start || !$end) {
+            $this->errors[] = "Merci de renseigner tous les champs.";
+            return;
+        }
+        // On récupère l'id du tournoi
+        if ($tournPId !== "") {
+        $tournId = $this->tournamentModel->getIdByPublicId("tournaments", $tournPId);
+        }
+        if ($tournId === 0) {
+            $this->errors[] = "Problème rencontré lors de la récupération de l'Id du tournoi";
+        }
+
+        // On convertie les dates en timestamps
+        $startTime = strtotime($start);
+        $endTime = strtotime($end);
+        if (!$startTime || !$endTime) {
+            $this->errors[] = "Merci de renseigner des dates valides.";
+            return;
+        }
+        if ($startTime > $endTime) {
+            $this->errors[] = "Le début du tournoi doit avoir lieu avant la fin.";
+            return;
+        }
+
+        // Si tout a fonctionné, on met a jour le tournoi
+        if (empty($this->errors)) {
+            $update = $this->editTournModel->editTourn($tournId, $name, $club, $city, $startTime, $endTime);
+            if (!$update) {
+                $this->errors[] = "Problème rencontré lors de la mise à jour du tournoi.";
+            } else {
+                $this->success = "Mise à jour réalisée avec succès.";
+            }
+        }
+        return;
 
     }
 }
