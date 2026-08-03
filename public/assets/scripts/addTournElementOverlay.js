@@ -35,7 +35,28 @@ addEltBtns.forEach(addButton => {
             </form>`;
 
 
-        } else if (buttonElement === "court") {
+        } else if (buttonElement === "draw") {
+
+            document.getElementById('popupDiv').innerHTML =
+            `<h3>Ajouter un tableau : </h3>
+            <form action="" method="POST" class="popup-form">
+                <input type="text" name="token" value="${currentToken}" hidden/>
+                <label>Titre du tableau : <input type="text" name="title" placeholder="ex : Simples Dames / Tounoi des trois raquettes..." required/></label>
+                <label>Nombre de joueurs : <input type="number" name="size" placeholder="64" required/></label>
+                <label>Format de jeu : <select name="type" required>
+                    <option value="1">3 sets à 6 jeux, avantages, 3e set classique (Format 1)</option>
+                    <option value="2">2 sets à 6 jeux, avantages, 3e set super jeu décisif (format 2)</option>
+                    <option value="3">2 sets à 4 jeux, point décisif, 3e set super jeu décisif (format 3)</option>
+                    <option value="4">2 sets à 6 jeux, point décisif, 3e set super jeu décisif (format 4)</option>
+                    <option value="5">2 sets à 3 jeux, point décisif, 3e set super jeu décisif (format 5)</option>
+                    <option value="6">2 sets à 4 jeux, point décisif, 3e set super jeu décisif (format 6)</option>
+                    <option value="7">2 sets à 5 jeux, point décisif, 3e set super jeu décisif (format 7)</option>
+                </select></label>
+                <button type="submit" name="add-elt" value="draw" class="button">Ajouter</button>
+            </form>`;
+
+
+        }  else if (buttonElement === "court") {
 
             document.getElementById('popupDiv').innerHTML =
             `<h3>Ajouter un court : </h3>
@@ -43,7 +64,7 @@ addEltBtns.forEach(addButton => {
                 <input type="text" name="token" value="${currentToken}" hidden/>
                 <label>Nom : <input type="text" name="name" placeholder="Nom du court" required/></label>
                 <label>Mot de passe : <input type="text" name="pass" placeholder="Nécessaire pour l'arbitrage" required/></label>
-                <button type="submit" name="add-court" class="button">Éditer</button>
+                <button type="submit" name="add-elt" value="court" class="button">Ajouter</button>
             </form>`;
 
 
@@ -53,11 +74,11 @@ addEltBtns.forEach(addButton => {
             `<h3>Ajouter un joueur : </h3>
             <form action="" method="POST" class="popup-form">
                 <input type="text" name="token" value="${currentToken}" hidden/>
-                <label>Nom : <input type="text" name="name" placeholder="Nom du joueur" required/></label>
-                <label>Prénom : <input type="text" name="name" placeholder="Prénom du joueur" required/></label>
-                <label>Nationalité : <input type="text" name="name" placeholder="En trois lettres (ex: FRA (france), GER (allemagne)..." required/></label>
+                <label>Nom : <input type="text" name="lastname" placeholder="Nom du joueur" required/></label>
+                <label>Prénom : <input type="text" name="firstname" placeholder="Prénom du joueur" required/></label>
+                <label>Nationalité : <input type="text" name="nationality" placeholder="En trois lettres (ex: FRA (france), GER (allemagne)..." required/></label>
                 <label>Classement : <input type="text" name="rank" placeholder="au format 12/3 ou 123" required/></label>
-                <button type="submit" name="add-player" class="button">Éditer</button>
+                <button type="submit" name="add-elt" value="player" class="button">Ajouter</button>
             </form>`;
 
 
@@ -69,11 +90,20 @@ addEltBtns.forEach(addButton => {
             <p> Si vous souhaitez modifier un match du draw, cliqué sur le bouton d'édition du match directement dans le draw.</p>
             <form action="" method="POST" class="popup-form">
                 <input type="text" name="token" value="${currentToken}" hidden/>
-                <label>Nom : <input type="text" name="name" placeholder="Nom du joueur" required/></label>
-                <label>Prénom : <input type="text" name="name" placeholder="Prénom du joueur" required/></label>
-                <label>Nationalité : <input type="text" name="name" placeholder="En trois lettres (ex: FRA (france), GER (allemagne)..." required/></label>
-                <label>Classement : <input type="text" name="rank" placeholder="au format 12/3 ou 123" required/></label>
-                <button type="submit" name="add-match" class="button">Éditer</button>
+                <label>Format de jeu : <select name="type" required>
+                    <option value="1">3 sets à 6 jeux, avantages, 3e set classique (Format 1)</option>
+                    <option value="2">2 sets à 6 jeux, avantages, 3e set super jeu décisif (format 2)</option>
+                    <option value="3">2 sets à 4 jeux, point décisif, 3e set super jeu décisif (format 3)</option>
+                    <option value="4">2 sets à 6 jeux, point décisif, 3e set super jeu décisif (format 4)</option>
+                    <option value="5">2 sets à 3 jeux, point décisif, 3e set super jeu décisif (format 5)</option>
+                    <option value="6">2 sets à 4 jeux, point décisif, 3e set super jeu décisif (format 6)</option>
+                    <option value="7">2 sets à 5 jeux, point décisif, 3e set super jeu décisif (format 7)</option>
+                </select></label>
+                <label>Équipe 1 Joueur 1 : <input type="text" name="TAP1" placeholder="Nom du joueur" required/></label>
+                <label>Équipe 1 Joueur 2 : <input type="text" name="TAP2" placeholder="Nom du joueur" required/></label>
+                <label>Équipe 2 Joueur 1 : <input type="text" name="TBP1" placeholder="Nom du joueur" required/></label>
+                <label>Équipe 2 Joueur 2 : <input type="text" name="TBP2" placeholder="Nom du joueur" required/></label>
+                <button type="submit" name="add-elt" value="match" class="button">Ajouter</button>
             </form>`;
 
             
@@ -83,10 +113,10 @@ addEltBtns.forEach(addButton => {
             `<h3>Ajouter un arbitre : </h3>
             <form action="" method="POST" class="popup-form">
                 <input type="text" name="token" value="${currentToken}" hidden/>
-                <label>Nom : <input type="text" name="name" placeholder="Nom de l'arbitre" required/></label>
-                <label>Prénom : <input type="text" name="name" placeholder="Prénom de l'arbitre" required/></label>
-                <label>Pseudo : <input type="text" name="name" placeholder="Utilisé pour arbitrer sur un court" required/></label>
-                <button type="submit" name="add-umpire" class="button">Éditer</button>
+                <label>Nom : <input type="text" name="lastname" placeholder="Nom de l'arbitre" required/></label>
+                <label>Prénom : <input type="text" name="firstname" placeholder="Prénom de l'arbitre" required/></label>
+                <label>Pseudo : <input type="text" name="username" placeholder="Utilisé pour arbitrer sur un court" required/></label>
+                <button type="submit" name="add-elt" value="umpire" class="button">Ajouter</button>
             </form>`;
 
         }

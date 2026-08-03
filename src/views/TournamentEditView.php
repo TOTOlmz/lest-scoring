@@ -41,8 +41,42 @@
                 data-name="<?= $this->tournament["name"] ?>" data-club="<?= $this->tournament["club"] ?>" data-city="<?= $this->tournament["city"] ?>"
                 data-start="<?= date("Y-m-d", intval($this->tournament["start_time"])) ?>" data-end="<?= date("Y-m-d", intval($this->tournament["end_time"])) ?>">Éditer</button>
             </div>
-
         </div>
+
+        <div class="edition-area">
+            <!-- Section gérant l'affichage des tableaux du tournoi -->
+            <div class="element-Area">
+                <div class="element-title">
+                    <?php if (empty($this->tournament["draws"]) || count($this->tournament["draws"], COUNT_NORMAL) <= 1): ?>
+                        <h2>Tableau</h2>
+                    <?php else: ?>
+                        <h2>Tableaux</h2>
+                    <?php endif; ?>
+                    <button class="element-details-button" isOpen="false">❯</button>
+                </div>
+                <div class="element-details" isOpen="false">
+                    <?php if (!empty($this->tournament["draws"]) && count($this->tournament["draws"]) > 1): ?>
+                        <?php foreach($this->tournament["draws"] as $draw): ?>
+                            <div class="details-infos-area">
+                                <p>
+                                    <strong><?= isset($draw["title"]) ? $draw["title"] : "" ?> : </strong>
+                                    Nombre de participants : <?= isset($draw["size"]) ? $draw["size"] : "" ?>
+                                    Format de jeu : <?= isset($draw["type"]) ? $draw["type"] : "" ?>
+                                </p>
+                            </div>
+                            <div class="details-action-buttons">
+                                <a class="button" href="./details?tournament=<?= $t["id_to_display"] ?>">Détails</a>
+                                <a class="button" href="./edit?tournament=<?= $t["id_to_display"] ?>">Éditer</a>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Le tournoi ne possède aucun tableau</p>
+                    <?php endif; ?>
+                    <button class="button" add-element="draw">Ajouter</button>
+                </div>
+            </div>
+        </div>
+
         <div class="edition-area">
 
             <!-- Section gérant l'affichage des courts -->
@@ -96,6 +130,7 @@
     
     <script> const currentToken = <?= json_encode($_SESSION["token"]); ?>; </script>
     <script src="./assets/scripts/addTournElementOverlay.js" type="module"></Script>
+    <script src="./assets/scripts/ElementList.js" type="module"></Script>
 
 
     <?php require_once ROOT_PATH . "/src/views/components/footer.php"; ?>
