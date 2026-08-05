@@ -1,5 +1,8 @@
-import {createOverlay, removeOverlay} from "./overlay.js";
+import {createOverlay, removeOverlay} from "./components/overlay.js";
 
+/*
+SCRIPT PERMETTANT DE GÉRER L'AFFICHAGE DANS LES OVERLAYS DE LA PAGE details?tournament=
+*/
 
 
 let osButtons = document.querySelectorAll('button[overlay-call]');

@@ -1,5 +1,8 @@
 import {createOverlay, removeOverlay} from "./components/overlay.js";
 
+/*
+SCRIPT PERMETTANT DE GÉRER L'AFFICHAGE DANS LES OVERLAYS D'AJOUT (BOUTONS AJOUTER) DE LA PAGE edit?tournament=
+*/
 let addEltBtns = document.querySelectorAll("button[add-element]");
 
 addEltBtns.forEach(addButton => {

@@ -1,0 +1,142 @@
+#popupDiv h3 {
+    height: 25px;
+    margin: 10px;
+}
+.draw-container {
+    height: calc(100% - 45px);
+    overflow: scroll;
+}
+
+
+div.draw-area {
+    display: flex;
+    flex-direction: row;
+    padding : 10px 0;
+    background-color: var(--grey-light);
+    width:fit-content;
+}
+div.draw-area div.draw-column {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+div.draw-area div.draw-column div.match-card {
+    position: relative;
+    background-color: var(--white);
+    border: solid 1px var(--black);
+    padding: 10px;
+    width: 200px;
+    height: 80px;
+    min-height: 80px;
+    margin: 5px 15px;
+}
+
+div.draw-area div.draw-column div.match-card p {
+    margin: 5px 0;
+}
+
+/* |||||||||||||||||||||||||||||||||| */
+/* BRANCHES POUR ARBORESCENCE DU DRAW */
+/* |||||||||||||||||||||||||||||||||| */
+div.draw-area div.draw-column div.match-card span.draw-h-start-branch {
+    position: absolute;
+    align-self: center;
+    height: 0;
+    width: 15px;
+    border: solid 2px var(--black);
+    left: 100%;
+    bottom: calc(50% - 1px);
+}
+
+div.draw-area div.draw-column div.match-card span.draw-v-branch {
+    position: absolute;
+    align-self: center;
+    height: 111px;
+    width: 0;
+    border: solid 2px var(--black);
+    bottom: 50%;
+    left: calc(100% + 15px);
+}
+
+div.draw-area div.draw-column div.match-card span.draw-h-end-branch {
+    position: absolute;
+    align-self: center;
+    height: 0;  
+    width: 16px;
+    border: solid 2px var(--black);
+    top: calc(50% - 1px);
+}
+/* |||||||||||||||||||||||||||||||||| */
+/* |||||||||||||||||||||||||||||||||| */
+
+div.draw-area div.draw-column div.match-card p[data-winner="true"] {
+    font-weight: 700;
+}
+
+div.player-card,
+div.court-card,
+div.umpire-card {
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1px var(--black);
+    background-color: var(--white);
+    padding: 0 10px;
+    justify-content: space-between;
+}
+div.player-card:last-child,
+div.court-card:last-child,
+div.umpire-card:last-child {
+    border-bottom: none;
+}
+
+
+div.player-card div.player-infos,
+div.court-card div.court-infos,
+div.umpire-card div.umpire-infos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+div.player-card div.player-infos div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+div.player-card div.player-infos img.player-flag {
+    height: 20px;
+    width: 30px;
+}
+div.player-card button,
+div.court-card button,
+div.umpire-card button { 
+    padding: 5px 15px;
+    margin: 5px;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    div.player-card div.player-infos {
+        flex-direction: column;
+    }
+    div.player-card div.player-infos div {
+        display: flex;
+        align-self: baseline;
+    }
+    div.player-card div.player-infos p,
+    div.player-card div.player-infos img,
+    div.court-card div.court-infos p,
+    div.umpire-card div.umpire-infos p {
+        margin: 5px;
+    }
+    
+    div.player-card div.player-actions,
+    div.court-card div.court-actions,
+    div.umpire-card div.umpire-actions {
+        display: flex;
+        flex-direction: column;
+    }
+    
+}

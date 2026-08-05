@@ -1,5 +1,9 @@
 import {createOverlay, removeOverlay} from "./components/overlay.js";
 
+/*
+SCRIPT PERMETTANT DE GÉRER L'AFFICHAGE DANS L'OVERLAY D'AJOUT DE DIRECTEUR SUR LA PAGE ADMINISTRATEUR
+*/
+
 let edoDirectorsBtns = document.querySelectorAll("button.edit-director");
 
 edoDirectorsBtns.forEach(button => {

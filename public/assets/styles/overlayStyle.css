@@ -8,12 +8,14 @@ div#overlayDiv {
     display:flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
 }
 
 div#popupDiv {
     background-color: var(--white);
     position: relative;
-    width: 70%;
+    width: 85%;
+    height: 80%;
     padding: 20px;
     border: none;
     border: solid 1px var(--black);

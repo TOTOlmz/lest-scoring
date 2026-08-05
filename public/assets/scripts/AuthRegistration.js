@@ -1,4 +1,9 @@
 
+
+/*
+SCRIPT PERMETTANT DE GÉRER L'AFFICHAGE SUR LA PAGE DE CONNEXION
+*/
+
 // Validation du mot de passe côté client
 const form = document.querySelector('form');
 form.querySelector('#submit-button').style.display = 'none';

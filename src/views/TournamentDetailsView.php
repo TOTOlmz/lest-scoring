@@ -79,7 +79,10 @@
                     </div>
 
                 <?php endforeach; ?>
-                <script src="./assets/scripts/drawAdaptation.js"></script>
+                <script type="module">
+                    import {drawAdaptation} from "./assets/scripts/components/drawAdaptation.js"; 
+                    drawAdaptation();
+                </script>
             </div>
         </div>
 
@@ -190,7 +193,7 @@
     </div>
 
     <script> const currentToken = <?= json_encode($_SESSION["token"]); ?>; </script>
-    <script src="./assets/scripts/tournamentDetailsOverlay.js"></script>
+    <script src="./assets/scripts/tournamentDetailsOverlay.js" type="module"></script>
     <?php require_once ROOT_PATH . "/src/views/components/footer.php"; ?>
 </body>
 </html>

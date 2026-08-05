@@ -1,3 +1,7 @@
+/*
+SCRIPT GÉRANT LE SYSTÈME D'ONGLETS S'OUVRANTS ET SE FERMANTS
+*/
+
 let elList = document.querySelectorAll(".element-Area");
 
 elList.forEach( list => {

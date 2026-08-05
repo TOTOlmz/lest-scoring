@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./assets/styles/elementListStyle.css">
     <link rel="stylesheet" href="./assets/styles/editTournamentStyle.css">
     <link rel="stylesheet" href="./assets/styles/overlayStyle.css">
+    <link rel="stylesheet" href="./assets/styles/drawDisplayStyle.css">
     <title>LEST-scoring</title>
 </head>
 <body>
@@ -56,17 +57,17 @@
                 </div>
                 <div class="element-details" isOpen="false">
                     <?php if (!empty($this->tournament["draws"]) && count($this->tournament["draws"]) > 1): ?>
-                        <?php foreach($this->tournament["draws"] as $draw): ?>
+                        <?php foreach($this->tournament["draws"] as $drawKey => $draw): ?>
                             <div class="details-infos-area">
                                 <p>
                                     <strong><?= isset($draw["title"]) ? $draw["title"] : "" ?> : </strong>
-                                    Nombre de participants : <?= isset($draw["size"]) ? $draw["size"] : "" ?>
-                                    Format de jeu : <?= isset($draw["type"]) ? $draw["type"] : "" ?>
+                                    <span>Nombre de participants : <?= isset($draw["size"]) ? $draw["size"] : "" ?></span>
+                                    <span>Format de jeu : <?= isset($draw["type"]) ? $draw["type"] : "" ?></span>
                                 </p>
                             </div>
                             <div class="details-action-buttons">
-                                <a class="button" href="./details?tournament=<?= $t["id_to_display"] ?>">Détails</a>
-                                <a class="button" href="./edit?tournament=<?= $t["id_to_display"] ?>">Éditer</a>
+                                <button class="button" draw-action="details" draw-key="<?= $drawKey ?>">Détails</a>
+                                <button class="button" draw-action="edit" draw-key="<?= $drawKey ?>">Éditer</a>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -128,8 +129,13 @@
 
     
     
-    <script> const currentToken = <?= json_encode($_SESSION["token"]); ?>; </script>
+    <script> 
+    const currentToken = <?= json_encode($_SESSION["token"]); ?>; 
+    const currentTournament = <?= json_encode($this->tournament) ?>;
+    </script>
+
     <script src="./assets/scripts/addTournElementOverlay.js" type="module"></Script>
+    <script src="./assets/scripts/drawSettingsOverlay.js" type="module"></Script>
     <script src="./assets/scripts/ElementList.js" type="module"></Script>
 
 

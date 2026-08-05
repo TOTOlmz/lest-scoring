@@ -1,5 +1,9 @@
 import {createOverlay, removeOverlay} from "./components/overlay.js";
 
+/*
+SCRIPT PERMETTANT DE GÉRER L'AFFICHAGE DANS L'OVERLAY D'AJOUT D'UN TOURNOI DE LA PAGE edit?tournament=
+*/
+
 let addTournBtn = document.querySelector("button.add-tournament");
 
 addTournBtn.addEventListener("click", () => {
