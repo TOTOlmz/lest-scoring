@@ -33,14 +33,15 @@ class EditTournModel extends BaseModel {
     }
 
     // Fonction permettant d'ajouter un tableau
-    public function addDraw(string $publicId, string $title, int $size, int $type, int $tournamentId): ?int {
+    public function addDraw(string $publicId, string $title, int $size, int $type, string $format, int $tournamentId): ?int {
 
-        $sql = "INSERT INTO draws (id_to_display, title, type, size, tournament_id) 
-        VALUES (:pId, :title, :type, :size, :tournId)";
+        $sql = "INSERT INTO draws (id_to_display, title, type, format, size, tournament_id) 
+        VALUES (:pId, :title, :type, :format, :size, :tournId)";
         $params = [
             "pId" => $publicId,
             "title" => $title,
             "type" => $type,
+            "format" => $format,
             "size" => $size,
             "tournId" => $tournamentId
         ];

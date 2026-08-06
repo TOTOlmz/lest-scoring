@@ -22,7 +22,7 @@ class DetailsModel extends BaseModel {
         }
 
         // On récupère les draws du tournoi
-        $sql = "SELECT id, id_to_display, title, type, size FROM draws WHERE tournament_id = :id";
+        $sql = "SELECT id, id_to_display, title, type, format, size FROM draws WHERE tournament_id = :id";
         $result["draws"] = $this->fetchAll($sql, ['id' => $tournId]);
 
         // On récupère les courts du tournoi

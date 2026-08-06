@@ -62,12 +62,11 @@
                                 <p>
                                     <strong><?= isset($draw["title"]) ? $draw["title"] : "" ?> : </strong>
                                     <span>Nombre de participants : <?= isset($draw["size"]) ? $draw["size"] : "" ?></span>
-                                    <span>Format de jeu : <?= isset($draw["type"]) ? $draw["type"] : "" ?></span>
+                                    <span>Format de jeu : <?= isset($draw["format"]) ? $draw["format"] : "" ?></span>
                                 </p>
                             </div>
                             <div class="details-action-buttons">
                                 <button class="button" draw-action="details" draw-key="<?= $drawKey ?>">Détails</a>
-                                <button class="button" draw-action="edit" draw-key="<?= $drawKey ?>">Éditer</a>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -135,7 +134,7 @@
     </script>
 
     <script src="./assets/scripts/addTournElementOverlay.js" type="module"></Script>
-    <script src="./assets/scripts/drawSettingsOverlay.js" type="module"></Script>
+    <script src="./assets/scripts/drawOptionsOverlay.js" type="module"></Script>
     <script src="./assets/scripts/ElementList.js" type="module"></Script>
 
 

@@ -20,7 +20,6 @@ dsoActionButtons.forEach(dsoButton => {
         createOverlay();
         // On réupère la position du draw dans le tableau et l'action demandée.
         const drawNb = dsoButton.getAttribute("draw-key");
-        const actionAsked = dsoButton.getAttribute("draw-action");
 
         // On s'assure de pouvoir récupérer les infos du draw avant d'appeler les fonctions (que ce soit bien un tableau et qu'il ait du contenu)
         let drawToDisplay = currentTournament["draws"][drawNb];
@@ -30,11 +29,7 @@ dsoActionButtons.forEach(dsoButton => {
 
         // Si le draw a bien des données, on appelle la fonction adéquate 
         } else {
-            if (actionAsked === "details") {
-                displayDetails(drawToDisplay);
-            } else if (actionAsked === "edit") {
-                displayEdit(drawToDisplay);
-            }
+            displayDrawDetails(drawToDisplay);
         }
 
         removeOverlay();
@@ -44,7 +39,7 @@ dsoActionButtons.forEach(dsoButton => {
 
 
 // Fonction permettant d'afficher les détails d'un tableau
-function displayDetails(draw) {
+function displayDrawDetails(draw) {
 
 
     let htmlCode = `
@@ -58,8 +53,7 @@ function displayDetails(draw) {
 
         const roundValues = Object.entries(round[1]);
 
-        console.log("round values : ", roundValues);
-        roundValues.forEach((match) => {
+        roundValues.forEach((match, index) => {
             htmlCode += `
                 <div class="match-card">
                 <p data-winner="${match[1].winner === "TA" ? "true" : "false"}">
@@ -68,12 +62,13 @@ function displayDetails(draw) {
                 <p>${match[1].final_score !== null ? match[1].final_score : ""}</p>
                 <p data-winner="${match[1].winner === "TB" ? "true" : "false"}">
                 ${match[1].teamBP1_name !== null ? match[1].teamBP1_name : ""} ${match[1].teamBP2_name !== null ? " / " + match[1].teamBP2_name : ""}
-                </p>`;
+                </p>
+                <div class="edit-match"><button class="button">Éditer ✎</button></div>`;
             
             if (roundValues.length > 1) {
                 htmlCode += `<span class="draw-h-start-branch"></span>`;
             }
-            if (parseInt(match[0]) % 2 === 0) {
+            if (parseInt(index) % 2 !== 0) {
                 htmlCode += `
                     <span class="draw-v-branch">
                         <span class="draw-h-end-branch"></span>
@@ -92,10 +87,3 @@ function displayDetails(draw) {
     return;
 }
 
-
-// Fonction permettant d'afficher les options d'édition d'un tableau
-function displayEdit(draw) {
-
-    console.log(draw);
-    return;
-}
