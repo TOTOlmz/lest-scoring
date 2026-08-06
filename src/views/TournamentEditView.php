@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./assets/styles/editTournamentStyle.css">
     <link rel="stylesheet" href="./assets/styles/overlayStyle.css">
     <link rel="stylesheet" href="./assets/styles/drawDisplayStyle.css">
+    <link rel="stylesheet" href="./assets/styles/matchCardEditionStyle.css">
     <title>LEST-scoring</title>
 </head>
 <body>

@@ -91,18 +91,19 @@ class TournEditFormsProcess extends BaseController {
         $title = isset($post["title"]) ? $post["title"] : "";
         $size = isset($post["size"]) ? intval($post["size"]) : "";
         $type = isset($post["type"]) ? intval($post["type"]) : "";
+        $format = isset($post["format"]) ? strtoupper($post["format"]) : "";
         $publicId = $this->generatePublicCode("draws");
 
         $realDrawSize = $this->nextPowerOfTwo($size);
 
-        if (!$size || !$type) {
+        if (!$size || !$type || $format !== "SINGLES" ||$format !== "DOUBLES") {
             $this->errors[] = "Impossible de récupérer les éléments. merci de réessayer à minima la taille du tableau et le format de jeu.";
         }
         if (empty($this->errors)) {
-            $drawId = $this->editTournModel->addDraw($publicId, $title, $realDrawSize, $type, $tournamentId);
+            $drawId = $this->editTournModel->addDraw($publicId, $title, $realDrawSize, $type, $format, $tournamentId);
             if ($drawId) { $this->success = "Ajout réalisé avec succès"; }
             else { $this->errors[] = "Échec de l'ajout."; }
-            $matchesNb = $this->generateDrawMatches($realDrawSize, $drawId, $type, $tournamentId);  // On génère tous les matchs du draw
+            $matchesNb = $this->generateDrawMatches($realDrawSize, $drawId, $type, $format, $tournamentId);  // On génère tous les matchs du draw
             if ($matchesNb) {
                 $this->success = "Ajout du tableau et de " . count($matchesNb) . " matchs avec succès.";
             } else {
@@ -129,9 +130,9 @@ class TournEditFormsProcess extends BaseController {
     }
     // Fonction permettant d'ajouter un joueur
     public function addPlayer (array $post, $tournamentId): void {
-        $fname = isset($post["firstname"]) ? $post["firstname"] : "";
-        $lname = isset($post["lastname"]) ? $post["lastname"] : "";
-        $nat = isset($post["nationality"]) ? $post["nationality"] : "";
+        $fname = isset($post["firstname"]) ? ucfirst(strtolower($post["firstname"])) : "";
+        $lname = isset($post["lastname"]) ? strtoupper($post["lastname"]) : "";
+        $nat = isset($post["nationality"]) ? strtoupper($post["nationality"]) : "";
         $rank = isset($post["rank"]) ? $post["rank"] : "";
         $publicId = $this->generatePublicCode("players");
 

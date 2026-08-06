@@ -5,7 +5,6 @@ import {cardEdition} from "./components/drawCardEditionFetch.js";
 SCRIPT PERMETTANT DE GÉRER L'AFFICHAGE DANS LES OVERLAYS D'ÉDITION ET VISUALISATION DES TABLEAUX DE LA PAGE edit?tournament=
 */
 
-console.log(currentTournament);
 
 const dsoActionButtons = document.querySelectorAll("button[draw-action]");
 
@@ -26,12 +25,12 @@ dsoActionButtons.forEach(dsoButton => {
         let drawToDisplay = currentTournament["draws"][drawNb];
         if (typeof drawToDisplay !== "object" || Object.keys(drawToDisplay).length === 0) {
             document.getElementById("popupDiv").innerHTML = "Impossible de récupérer les informations du tableau";
-            console.log(drawToDisplay);
 
         // Si le draw a bien des données, on appelle la fonction adéquate 
         } else {
             displayDrawDetails(drawToDisplay);
-            EditAsked();
+            EditAsked(drawToDisplay, currentTournament["players"]);
+            
         }
 
         removeOverlay();
@@ -91,11 +90,11 @@ function displayDrawDetails(draw) {
 
 
 // fonction permettant d'appeler la fonction de cardEdition
-function EditAsked () {
+function EditAsked (drawToDisplay, players) {
     const cardEditionButtons = document.querySelectorAll("button.button[edit-match-card]");
     cardEditionButtons.forEach(btn => {
         btn.addEventListener("click", () => {
-            cardEdition(btn);
+            cardEdition(btn, drawToDisplay, players);
         });
     });
 }

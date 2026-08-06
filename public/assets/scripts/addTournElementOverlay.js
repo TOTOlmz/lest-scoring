@@ -46,7 +46,11 @@ addEltBtns.forEach(addButton => {
                 <input type="text" name="token" value="${currentToken}" hidden/>
                 <label>Titre du tableau : <input type="text" name="title" placeholder="ex : Simples Dames / Tounoi des trois raquettes..." required/></label>
                 <label>Nombre de joueurs : <input type="number" name="size" placeholder="64" required/></label>
-                <label>Format de jeu : <select name="type" required>
+                <label>Type de tableau : <select name="type" required>
+                    <option value="singles">Simples</option>
+                    <option value="doubles">Doubles</option>
+                </select></label>
+                <label>Format de jeu : <select name="format" required>
                     <option value="1">3 sets à 6 jeux, avantages, 3e set classique (Format 1)</option>
                     <option value="2">2 sets à 6 jeux, avantages, 3e set super jeu décisif (format 2)</option>
                     <option value="3">2 sets à 4 jeux, point décisif, 3e set super jeu décisif (format 3)</option>

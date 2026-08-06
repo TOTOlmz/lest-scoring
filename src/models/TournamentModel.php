@@ -56,6 +56,9 @@ class TournamentModel extends BaseModel {
         // On récupère le tournoi
         $sql = "SELECT * FROM tournaments WHERE id = :t_id";
         $tournament = $this->fetchOne($sql, [":t_id" => $tournamentId]);
+        // On récupère les joueurs liés au tournoi
+        $sql = "SELECT * FROM players WHERE tournament_id = :t_id";
+        $tournament["players"] = $this->fetchAll($sql, [":t_id" => $tournamentId]);
         // On récupère les courts liés au tournoi
         $sql = "SELECT * FROM courts WHERE tournament_id = :t_id";
         $tournament["courts"] = $this->fetchAll($sql, [":t_id" => $tournamentId]);

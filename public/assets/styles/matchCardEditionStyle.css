@@ -1,0 +1,40 @@
+div.match-edition-form {
+    background-color: var(--white);
+    padding: 10px;
+    box-shadow: 5px 5px 0 var(--black),
+                5px -5px 0 var(--black);
+    width: 40%;
+    height: 55%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    transform: translate(-50%, -50%);
+}
+
+div.match-edition-form input,
+div.match-edition-form select {
+    padding: 10px;
+    width: 90%;
+    border: solid 1px var(--black);
+    margin: 2px;
+}
+
+@media screen and (max-width: 768px) {
+    div.match-edition-form {
+        background-color: var(--white);
+        box-shadow: 5px 5px 0 var(--black),
+                    5px -5px 0 var(--black);
+        width: 80%;
+        height: 55%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        justify-content: center;
+        align-items: center;
+        display: grid;
+        transform: translate(-50%, -50%);
+}
+}

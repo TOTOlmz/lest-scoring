@@ -45,9 +45,8 @@ class DetailsModel extends BaseModel {
         $result["matches"] = $this->fetchAll($sql, ['id' => $tournId]);
 
         // On récupère ensuite ses joueurs
-        $sql = 'SELECT DISTINCT p.id_to_display, p.firstname, p.lastname, p.nationality, p.rank FROM players p
-        JOIN matches m ON p.id = m.teamA_player1_id OR p.id = m.teamA_player2_id OR p.id = m.teamB_player1_id OR p.id = m.teamB_player2_id
-        WHERE m.tournament_id = :id ORDER BY p.lastname, p.firstname ASC';
+        $sql = 'SELECT DISTINCT id_to_display, firstname, lastname, nationality, rank FROM players 
+        WHERE tournament_id = :id ORDER BY lastname, firstname ASC';
         $result["players"] = $this->fetchAll($sql, ['id' => $tournId]);
 
         return $result;

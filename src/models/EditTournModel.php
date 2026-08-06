@@ -85,9 +85,9 @@ class EditTournModel extends BaseModel {
     }
 
     // Fonction permettant d'ajouter un tableau
-    public function addPlayer(string $publicId, string $fname, string $lname, string $nat, string $rank, int $tournamentId): ?int {
+    public function addPlayer(string $publicId, string $fname, string $lname, string $nat, string $rank, int $tournId): ?int {
 
-        $sql = "INSERT INTO players (id_to_display, firstname, lastname, nationality, rank) 
+        $sql = "INSERT INTO players (id_to_display, firstname, lastname, nationality, rank, tournament_id) 
         VALUES (:pId, :fname, :lname, :nat, :rank, :tournId)";
         $params = [
             "pId" => $publicId,
@@ -95,7 +95,7 @@ class EditTournModel extends BaseModel {
             "lname" => $lname,
             "nat" => $nat,
             "rank" => $rank,
-            "tournId" => $tournamentId
+            "tournId" => $tournId
         ];
 
         return $this->lastInsert($sql, $params);
