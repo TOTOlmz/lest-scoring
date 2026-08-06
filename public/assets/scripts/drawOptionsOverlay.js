@@ -1,5 +1,6 @@
 import {createOverlay, removeOverlay} from "./components/overlay.js";
 import {drawAdaptation} from "./components/drawAdaptation.js";
+import {cardEdition} from "./components/drawCardEditionFetch.js";
 /*
 SCRIPT PERMETTANT DE GÉRER L'AFFICHAGE DANS LES OVERLAYS D'ÉDITION ET VISUALISATION DES TABLEAUX DE LA PAGE edit?tournament=
 */
@@ -30,6 +31,7 @@ dsoActionButtons.forEach(dsoButton => {
         // Si le draw a bien des données, on appelle la fonction adéquate 
         } else {
             displayDrawDetails(drawToDisplay);
+            EditAsked();
         }
 
         removeOverlay();
@@ -55,7 +57,7 @@ function displayDrawDetails(draw) {
 
         roundValues.forEach((match, index) => {
             htmlCode += `
-                <div class="match-card">
+                <div class="match-card" data-match="${match[0]}">
                 <p data-winner="${match[1].winner === "TA" ? "true" : "false"}">
                 ${match[1].teamAP1_name !== null ? match[1].teamAP1_name : ""} ${match[1].teamAP2_name !== null ? " / " + match[1].teamAP2_name : ""}
                 </p>
@@ -63,7 +65,7 @@ function displayDrawDetails(draw) {
                 <p data-winner="${match[1].winner === "TB" ? "true" : "false"}">
                 ${match[1].teamBP1_name !== null ? match[1].teamBP1_name : ""} ${match[1].teamBP2_name !== null ? " / " + match[1].teamBP2_name : ""}
                 </p>
-                <div class="edit-match"><button class="button">Éditer ✎</button></div>`;
+                <div class="edit-match"><button class="button" edit-match-card round="${round[0]}" match-index="${index}" match="${match[0]}">Éditer ✎</button></div>`;
             
             if (roundValues.length > 1) {
                 htmlCode += `<span class="draw-h-start-branch"></span>`;
@@ -85,5 +87,16 @@ function displayDrawDetails(draw) {
     document.getElementById("popupDiv").innerHTML = htmlCode;
     drawAdaptation();
     return;
+}
+
+
+// fonction permettant d'appeler la fonction de cardEdition
+function EditAsked () {
+    const cardEditionButtons = document.querySelectorAll("button.button[edit-match-card]");
+    cardEditionButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            cardEdition(btn);
+        });
+    });
 }
 
